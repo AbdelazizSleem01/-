@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Methods of Research Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"/>
+<style>
+  :root {
+    --primary: #185FA5;
+    --primary-light: #E6F1FB;
+    --primary-mid: #378ADD;
+    --primary-dark: #0C447C;
+    --success: #3B6D11;
+    --success-bg: #EAF3DE;
+    --success-border: #639922;
+    --danger: #791F1F;
+    --danger-bg: #FCEBEB;
+    --danger-border: #E24B4A;
+    --amber: #BA7517;
+    --amber-bg: #FAEEDA;
+    --text-primary: #1a1a2e;
+    --text-secondary: #5F5E5A;
+    --text-muted: #888780;
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --border: rgba(0,0,0,0.1);
+    --border-light: rgba(0,0,0,0.06);
+    --radius: 14px;
+    --radius-sm: 10px;
+    --radius-xs: 8px;
+    --shadow: 0 2px 12px rgba(24,95,165,0.08);
+    --shadow-hover: 0 4px 20px rgba(24,95,165,0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  #app {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .app-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .header-icon {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, #185FA5, #378ADD);
+    border-radius: 20px;
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+    box-shadow: 0 8px 24px rgba(24,95,165,0.3);
+  }
+  .header-icon i { font-size: 32px; color: #fff; }
+  .app-title {
+    font-size: 22px; font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .app-subtitle {
+    font-size: 14px; color: var(--text-secondary);
+  }
+
+  /* ── Card ── */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 0.5px solid var(--border-light);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  /* ── Section label ── */
+  .section-label {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+  }
+  .section-label i { font-size: 16px; }
+
+  /* ── Lecture Grid ── */
+  .lec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+  .lec-btn {
+    padding: 12px 10px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--card);
+    cursor: pointer;
+    text-align: center;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    line-height: 1.4;
+    position: relative;
+  }
+  .lec-btn:hover {
+    border-color: var(--primary-mid);
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+  }
+  .lec-btn.active {
+    background: var(--primary-light);
+    border-color: var(--primary-mid);
+    color: var(--primary-dark);
+    box-shadow: 0 0 0 3px rgba(55,138,221,0.15);
+  }
+  .lec-btn.active::after {
+    content: '';
+    position: absolute;
+    top: 6px; left: 6px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--primary-mid);
+  }
+  .lec-btn .lec-num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary-mid);
+    margin-bottom: 2px;
+  }
+  .lec-btn .lec-title {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .lec-btn .lec-sub {
+    font-size: 10.5px;
+    opacity: 0.75;
+  }
+  .lec-btn.active .lec-num { color: var(--primary-dark); }
+
+  .select-all-btn {
+    grid-column: 1 / -1;
+    padding: 11px;
+    border: 1.5px dashed var(--border);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    transition: all 0.2s;
+  }
+  .select-all-btn:hover { border-color: var(--primary-mid); color: var(--primary); background: var(--primary-light); }
+  .select-all-btn.active { border-color: var(--primary-mid); color: var(--primary-dark); background: var(--primary-light); border-style: solid; }
+
+  /* ── Start Button ── */
+  .start-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #185FA5, #378ADD);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(24,95,165,0.35);
+  }
+  .start-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #0C447C, #185FA5);
+    box-shadow: 0 6px 20px rgba(24,95,165,0.45);
+    transform: translateY(-1px);
+  }
+  .start-btn:disabled {
+    background: #D3D1C7;
+    color: #888780;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+  .start-btn i { font-size: 20px; }
+
+  /* ── Progress ── */
+  .progress-wrap {
+    margin-bottom: 1.25rem;
+  }
+  .progress-top {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 8px;
+  }
+  .progress-label { font-size: 13px; color: var(--text-secondary); font-weight: 500; }
+  .progress-count { font-size: 13px; color: var(--primary); font-weight: 700; }
+  .progress-bar-wrap {
+    height: 6px;
+    background: #E6F1FB;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #185FA5, #378ADD);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── Question ── */
+  .question-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+  .question-badge i { font-size: 14px; }
+  .question-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  /* ── Options ── */
+  .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.25rem; }
+  .opt-btn {
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--card);
+    cursor: pointer;
+    text-align: right;
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: all 0.18s;
+    display: flex; align-items: center; gap: 12px;
+    line-height: 1.5;
+  }
+  .opt-btn .opt-letter {
+    min-width: 30px; height: 30px;
+    background: var(--bg);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    transition: all 0.18s;
+  }
+  .opt-btn:hover:not(:disabled) {
+    border-color: var(--primary-mid);
+    background: var(--primary-light);
+    transform: translateX(-2px);
+  }
+  .opt-btn:hover:not(:disabled) .opt-letter {
+    background: var(--primary-mid);
+    color: #fff;
+  }
+  .opt-btn:disabled { cursor: default; }
+  .opt-btn.correct {
+    background: var(--success-bg);
+    border-color: var(--success-border);
+    color: var(--success);
+  }
+  .opt-btn.correct .opt-letter {
+    background: var(--success-border);
+    color: #fff;
+  }
+  .opt-btn.wrong {
+    background: var(--danger-bg);
+    border-color: var(--danger-border);
+    color: var(--danger);
+  }
+  .opt-btn.wrong .opt-letter {
+    background: var(--danger-border);
+    color: #fff;
+  }
+
+  /* ── Feedback ── */
+  .feedback-box {
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    border: 1px solid;
+    display: flex; gap: 10px;
+  }
+  .feedback-box i { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .feedback-box.correct {
+    background: var(--success-bg);
+    border-color: var(--success-border);
+    color: var(--success);
+  }
+  .feedback-box.wrong {
+    background: var(--danger-bg);
+    border-color: var(--danger-border);
+    color: var(--danger);
+  }
+
+  /* ── Next Button ── */
+  .next-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-xs);
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px; font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 3px 10px rgba(24,95,165,0.3);
+  }
+  .next-btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+  .next-btn i { font-size: 16px; }
+
+  /* ── Result ── */
+  .result-hero {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-bottom: 1.25rem;
+  }
+  .score-ring {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(var(--primary-mid) 0%, var(--primary-mid) var(--pct, 0%), #E6F1FB var(--pct, 0%));
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.25rem;
+    position: relative;
+  }
+  .score-ring::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    background: var(--card);
+    border-radius: 50%;
+  }
+  .score-inner {
+    position: relative; z-index: 1; text-align: center;
+  }
+  .score-num { font-size: 28px; font-weight: 700; color: var(--primary-dark); line-height: 1; }
+  .score-total { font-size: 13px; color: var(--text-secondary); }
+  .score-pct { font-size: 26px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+  .score-desc { font-size: 14px; color: var(--text-secondary); }
+  .grade-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 15px; font-weight: 700;
+    margin-top: 1rem;
+  }
+  .grade-A { background: #EAF3DE; color: #3B6D11; }
+  .grade-B { background: #E6F1FB; color: #0C447C; }
+  .grade-C { background: #FAEEDA; color: #854F0B; }
+  .grade-D { background: #FCEBEB; color: #791F1F; }
+
+  /* Stats row */
+  .stats-row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px; margin-bottom: 1.25rem;
+  }
+  .stat-card {
+    background: var(--bg);
+    border-radius: var(--radius-xs);
+    padding: 14px 12px;
+    text-align: center;
+    border: 0.5px solid var(--border-light);
+  }
+  .stat-card i { font-size: 22px; margin-bottom: 6px; display: block; }
+  .stat-card .stat-val { font-size: 20px; font-weight: 700; color: var(--text-primary); }
+  .stat-card .stat-lbl { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .stat-correct i { color: var(--success-border); }
+  .stat-wrong i { color: var(--danger-border); }
+  .stat-pct i { color: var(--primary-mid); }
+
+  /* ── Review ── */
+  .review-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.25rem; }
+  .review-item {
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    border: 0.5px solid var(--border-light);
+    background: var(--card);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .review-item .ri-q {
+    font-weight: 600; font-size: 13.5px;
+    margin-bottom: 8px; color: var(--text-primary);
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .review-item .ri-q i { color: var(--danger-border); flex-shrink: 0; font-size: 16px; margin-top: 2px; }
+  .ri-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; font-size: 13px; }
+  .ri-row i { flex-shrink: 0; font-size: 15px; margin-top: 2px; }
+  .ri-wrong { color: var(--danger); }
+  .ri-wrong i { color: var(--danger-border); }
+  .ri-correct { color: var(--success); }
+  .ri-correct i { color: var(--success-border); }
+  .ri-exp { font-size: 12px; color: var(--text-secondary); margin-top: 8px; padding-top: 8px; border-top: 0.5px solid var(--border-light); }
+
+  /* ── Restart ── */
+  .restart-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #185FA5, #378ADD);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'Cairo', sans-serif;
+    font-size: 15px; font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(24,95,165,0.3);
+  }
+  .restart-btn:hover {
+    background: linear-gradient(135deg, #0C447C, #185FA5);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(24,95,165,0.4);
+  }
+  .restart-btn i { font-size: 18px; }
+
+  .all-correct {
+    text-align: center; padding: 1.5rem;
+    color: var(--success); font-weight: 600;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .all-correct i { font-size: 40px; color: var(--success-border); }
+
+  .divider { border: none; border-top: 0.5px solid var(--border-light); margin: 1rem 0; }
+</style>
+
+<div id="app">
+  <!-- Header -->
+  <div class="app-header">
+    <div class="header-icon"><i class="ti ti-microscope"></i></div>
+    <div class="app-title">Methods of Research</div>
+    <div class="app-subtitle">طرق البحث التمريضي — اختبار تفاعلي</div>
+  </div>
+
+  <!-- Select Screen -->
+  <div id="screen-select">
+    <div class="card">
+      <div class="section-label">
+        <i class="ti ti-layout-grid"></i>
+        اختر المحاضرات
+      </div>
+      <div class="lec-grid" id="lec-grid"></div>
+      <button class="start-btn" id="start-btn" disabled>
+        <i class="ti ti-player-play"></i>
+        ابدأ الاختبار
+      </button>
+    </div>
+  </div>
+
+  <!-- Quiz Screen -->
+  <div id="screen-quiz" style="display:none"></div>
+
+  <!-- Result Screen -->
+  <div id="screen-result" style="display:none"></div>
+</div>
+
+<script>
+const ALL_QUESTIONS = [
+  {lec:1, q:"What is the definition of 'Research' according to the book?", opts:["A creative and systematic work undertaken to increase the stock of knowledge","A clinical method used only in hospitals","A process of treating patients based on evidence","A method of teaching nursing students"],ans:0, exp:"Research is defined as creative and systematic work to increase knowledge — involving collection, organization, and analysis of evidence."},
+  {lec:1, q:"The word 'Re' in research means:", opts:["Repeat the same work","New, once again, or fresh","Review older studies","Reject current theories"],ans:1, exp:"'Re' means new, once again, or fresh — and 'Search' means to look for or examine something closely."},
+  {lec:1, q:"Which of the following is an example of a DEPENDENT variable?", opts:["Maternal age in a pregnancy study","Cigarette smoking in a lung cancer study","Lung cancer in a smoking study","Teaching strategy in a nursing intervention"],ans:2, exp:"The dependent variable is the outcome (condition/disease) that depends on or is caused by the independent variable. Lung cancer depends on smoking."},
+  {lec:1, q:"Which characteristic is NOT a criterion of good research?", opts:["Begins with a clearly defined purpose","Replicable","Based on researcher's personal opinion only","Uses valid and reliable data collection tools"],ans:2, exp:"Good research must be objective and systematic, not based on personal opinion. It must be evidence-based and unbiased."},
+  {lec:1, q:"The scope of nursing research includes:", opts:["Only laboratory research","Clinical research, health systems research, and nursing education research","Administrative work and budget planning","Patient counselling and bedside care only"],ans:1, exp:"Nursing research encompasses clinical research, health systems and outcomes research, and nursing education research."},
+  {lec:1, q:"Which of the following best describes the INDEPENDENT variable?", opts:["The outcome or condition being measured","The variable that causes or influences the dependent variable","The variable that is never manipulated","The control group in an experiment"],ans:1, exp:"The independent variable is believed to cause or influence the dependent variable. In experimental research, it is the treatment."},
+  {lec:1, q:"According to Calmorin (2004), which of the following is a characteristic of a good researcher?", opts:["RESEARCH: Research-oriented, Efficient, Scientific, Effective, Active, Resourceful, Creative, Honest, Economical, Reliable","SMART: Specific, Measurable, Achievable, Reliable, Time-based","PICO: Patient, Intervention, Comparison, Outcome","ADPIE: Assessment, Diagnosis, Planning, Implementation, Evaluation"],ans:0, exp:"Calmorin (2004) used the acronym RESEARCHER to describe a good researcher's characteristics."},
+  {lec:1, q:"Data is described as:", opts:["Processed information used for decision making","Raw facts that have no specific meaning on their own","The final result of a research study","A type of statistical test"],ans:1, exp:"Data refers to raw facts that have no specific meaning. Information is processed data that has a purpose and meaning."},
+  {lec:1, q:"Which of the following steps comes FIRST in the research process?", opts:["Data collection","Identify the problem","Pilot study","Data analysis"],ans:1, exp:"The first step in the research process is to identify the problem, followed by determining the purpose of the study."},
+  {lec:1, q:"What is BIAS in research?", opts:["A method of data analysis","A feeling or influence that strongly favors selection of study subjects or outcome","A type of sampling technique","An ethical principle in nursing research"],ans:1, exp:"Bias is a feeling or influence that strongly favors selection of study subjects or the outcome of findings."},
+  {lec:2, q:"A research proposal is best defined as:", opts:["A completed research study submitted for publication","A future plan showing how the steps of research will be applied","A summary of past research on a topic","An ethical approval form"],ans:1, exp:"Research proposal is a future plan showing how to apply the steps of research or clarifying how the steps will be applied."},
+  {lec:2, q:"A good/successful research proposal should be SMART. What does the 'M' stand for?", opts:["Motivating","Measurable","Methodological","Multidisciplinary"],ans:1, exp:"SMART stands for Specific, Measurable, Achievable, Reliable, Time-based, Benefit-oriented, and Innovative."},
+  {lec:2, q:"Which is the FIRST step in writing a research proposal?", opts:["Go to the library to find references","Select the area or general topic according to your specialty","Write the introduction section","Identify the sampling technique"],ans:1, exp:"The first step is to select the area or general topic that interests you according to your specialty."},
+  {lec:2, q:"The pilot study in a research proposal is conducted on:", opts:["100% of the total sample","50% of the total sample","10% of the total sample","The control group only"],ans:2, exp:"The pilot study is conducted on 10% of the total sample to evaluate the applicability and clarity of the tools."},
+  {lec:2, q:"Content validity (Jury) means:", opts:["The tools will be tested for content validity by three experts","The researcher self-evaluates the tool","The statistical analysis confirms validity","The pilot study confirms reliability"],ans:0, exp:"Content validity (Jury) means the tools will be tested for content validity by three experts."},
+  {lec:2, q:"In a research protocol, the tense used for writing should be:", opts:["Past tense","Present tense","Future tense 'will'","Mixed tenses"],ans:2, exp:"The protocol must be written in future tense 'will', while the thesis is written in past tense."},
+  {lec:2, q:"The administrative design involves:", opts:["Statistical analysis of data","The researcher taking consent from Dean and work director","Conducting the pilot study","Writing the discussion section"],ans:1, exp:"The administrative design means the researcher takes consent from Dean and work director or manager of the study setting."},
+  {lec:2, q:"The introduction in a research proposal should range approximately:", opts:["1-2 pages","3-5 pages (sometimes up to 7)","8-10 pages","Only a paragraph"],ans:1, exp:"The introduction ranges about 3-5 pages and sometimes reaches 7 pages."},
+  {lec:2, q:"In a research questionnaire, the FIRST part typically contains:", opts:["Knowledge related to the topic","Socio-demographic data (name, age, sex, etc.)","Statistical analysis results","Ethical considerations"],ans:1, exp:"The first part is concerned with socio-demographic data. The second part covers knowledge related to the topic."},
+  {lec:2, q:"References in a research proposal should be:", opts:["Updated, arranged alphabetically, and free of linguistic errors","Written in any order as long as all are listed","Only include primary sources","Not required in a protocol"],ans:0, exp:"References should be updated, arranged alphabetically, free of linguistic errors, and list only references that have been used."},
+  {lec:3, q:"A research problem is best described as:", opts:["A specific hypothesis to be tested","A broad issue the researcher would like to address through research","A completed section of the introduction","The final research question only"],ans:1, exp:"Research problem is a broad issue identifying a difficulty, doubt, or area of concern in theory or practice."},
+  {lec:3, q:"A good research problem should:", opts:["Be based only on the researcher's curiosity","Address a knowledge gap and be significant enough to contribute to existing research","Be as broad as possible to cover many topics","Avoid data collection challenges"],ans:1, exp:"A good research problem should address a knowledge gap, be significant, lead to further research, and be of interest to the researcher."},
+  {lec:3, q:"Which is NOT a source of research problems?", opts:["Practical experience in nursing practice","Previous research","Personal income of the researcher","Technological change"],ans:2, exp:"Sources of research problems include practical experience, daily problems, previous research, existing theories, technological change, unexplored areas, etc."},
+  {lec:3, q:"A null hypothesis implies:", opts:["A strong positive relationship between variables","That there is no relation or statistical difference between variables or groups","A causal relationship exists","The independent variable affects the dependent variable"],ans:1, exp:"The null hypothesis implies there is no relation or statistical difference between variables or groups."},
+  {lec:3, q:"A directional (alternative) hypothesis states:", opts:["There is no difference between groups","A specific predicted direction of the relationship or difference between variables","Only the null hypothesis is false","Variables are not related"],ans:1, exp:"A directional hypothesis predicts a specific direction — e.g., 'The experimental group will score higher than the control group.'"},
+  {lec:3, q:"A good hypothesis must be:", opts:["Vague and open to interpretation","Testable, simple, stated in present tense, and expressed as a declarative sentence","Always stated as a null hypothesis","Based solely on the researcher's opinion"],ans:1, exp:"A good hypothesis must be testable with available resources, simple (one relationship), in present tense, and a declarative sentence."},
+  {lec:3, q:"The research AIM is:", opts:["A broad overview of the background of the study","A specific, measurable statement of what the researcher intends to achieve","A summary of past findings","An overview of statistical methods"],ans:1, exp:"The aim is what the researcher intends to achieve from the research. It is a specific, measurable intention."},
+  {lec:4, q:"A literature review is best defined as:", opts:["A statistical tool for data analysis","A critical summary and analysis of published studies about a specific topic","A method of sampling participants","An ethical requirement for research"],ans:1, exp:"A literature review is a critical summary and analysis of published knowledge, theories, and findings about a specific research topic."},
+  {lec:4, q:"The PRIMARY purpose of a literature review is to:", opts:["Replace data collection","Demonstrate the researcher's knowledge, identify gaps, and justify the need for the study","List all available references","Provide the study's results"],ans:1, exp:"Purpose: demonstrate knowledge, identify gaps, build on existing work, justify the study's need, and support the research framework."},
+  {lec:4, q:"Sources for a literature review should be:", opts:["At least 15 years old","Current (within the last 5 years), relevant, and from reliable sources","Only from textbooks","Unpublished theses only"],ans:1, exp:"Literature review sources should be current (last 5 years), relevant, reliable, from peer-reviewed journals, and properly cited."},
+  {lec:4, q:"A literature review is organized:", opts:["From the oldest to the most recent study only","From broad and general to specific and narrow","Alphabetically by author","By the length of the study"],ans:1, exp:"Literature review is organized from general to specific. It begins with broad background and narrows to the specific problem."},
+  {lec:5, q:"Which research design involves randomly assigning participants to groups?", opts:["Descriptive design","Experimental design","Retrospective design","Cross-sectional design"],ans:1, exp:"Experimental design involves random assignment to experimental and control groups. It is used to test cause-and-effect relationships."},
+  {lec:5, q:"A cross-sectional study collects data:", opts:["Over a long period of time","At one point in time","Before and after an intervention","Only from control groups"],ans:1, exp:"Cross-sectional studies collect data at one point in time. They are used to describe prevalence or relationships at a single moment."},
+  {lec:5, q:"A retrospective study examines:", opts:["Future outcomes of a current intervention","Past records or experiences to understand a current outcome","Current behavior of two matched groups","The same group over several years"],ans:1, exp:"Retrospective studies look backward — starting from an outcome (e.g., a disease) and tracing back to find potential causes."},
+  {lec:5, q:"Which design is used when the researcher cannot manipulate variables for ethical reasons?", opts:["Experimental","Quasi-experimental","Non-experimental / Descriptive","Longitudinal"],ans:2, exp:"Non-experimental (descriptive) designs are used when manipulation is impossible or unethical. The researcher observes without intervening."},
+  {lec:6, q:"The POPULATION in research refers to:", opts:["Only the participants who agreed to join the study","The entire group of individuals who share common characteristics relevant to the research question","The experimental group only","A subset of the sample"],ans:1, exp:"Population is the entire group sharing common characteristics relevant to the study. The sample is drawn from this population."},
+  {lec:6, q:"RANDOM SAMPLING means:", opts:["The researcher selects the most convenient participants","Every member of the population has an equal chance of being selected","Participants self-select into the study","Participants are selected based on specific criteria"],ans:1, exp:"In random sampling, every member of the population has an equal and independent chance of being selected. It reduces selection bias."},
+  {lec:6, q:"PURPOSIVE (judgmental) sampling involves:", opts:["Random selection of participants","Selecting participants based on specific characteristics relevant to the study","Using volunteers only","Selecting participants in a specific setting"],ans:1, exp:"Purposive sampling involves handpicking participants who have specific characteristics or knowledge relevant to the research question."},
+  {lec:6, q:"Sample SIZE is affected by:", opts:["The researcher's preference only","Type of study, degree of accuracy, population size, and available resources","Only the study design","Only the population size"],ans:1, exp:"Sample size is affected by: type of study (descriptive vs. experimental), degree of accuracy needed, heterogeneity of population, and available resources/time/money."},
+  {lec:8, q:"VALIDITY of a research tool means:", opts:["The tool produces consistent results on repeated use","The tool measures what it is supposed to measure","The tool is easy to use","The tool is inexpensive"],ans:1, exp:"Validity means the tool measures what it is supposed to measure. Types include content validity, criterion validity, and construct validity."},
+  {lec:8, q:"RELIABILITY of a research tool means:", opts:["The tool accurately measures the concept","The tool produces consistent, stable results when used repeatedly under the same conditions","The tool has been approved by experts","The tool is widely used in research"],ans:1, exp:"Reliability means the tool produces consistent and stable results on repeated use under similar conditions. It is measured by Cronbach's Alpha (r > 0.7 = reliable)."},
+  {lec:8, q:"Content validity is best established by:", opts:["Conducting a pilot study","Having experts (jury) review the tool to ensure it covers all important aspects","Running statistical tests only","Comparing results with another tool"],ans:1, exp:"Content validity is evaluated by a jury of 3 or more experts who assess whether the tool adequately covers all content areas relevant to the research."},
+  {lec:8, q:"Cronbach's Alpha is used to measure:", opts:["Content validity","Internal consistency reliability","Criterion validity","Test-retest reliability"],ans:1, exp:"Cronbach's Alpha measures internal consistency reliability. A value of r > 0.7 indicates acceptable reliability."},
+  {lec:9, q:"Nursing Research Ethics is defined as:", opts:["The process of obtaining funding for research","The act of moral principles which the researcher follows to ensure rights and welfare of individuals under study","A type of research design","The method of writing references"],ans:1, exp:"Nursing Research Ethics can be defined as the act of moral principles which the researcher has to follow while conducting nursing research to ensure the rights and welfare of individuals, groups, or communities under study."},
+  {lec:9, q:"The RIGHT OF SELF-DETERMINATION means:", opts:["The researcher decides who participates in the study","Participants have the right to decide voluntary participation or termination and refuse to give information at any time","The IRB approves the study design","Data is kept confidential"],ans:1, exp:"The right of self-determination means participants have the right to decide voluntary participation or termination and refuse to give information at any time."},
+  {lec:9, q:"RIGHT OF BENEFICENCE means:", opts:["Participants can withdraw at any time","Establishing a positive risk/benefits ratio — risk should never exceed the benefit for people","Fair treatment and maintenance of privacy","Equality in distribution of benefits"],ans:1, exp:"Right of Beneficence means establishing a positive risk/benefits ratio which ensures the risk of research should never exceed the benefit for people from knowledge generated by research activity."},
+  {lec:9, q:"The INFORMED CONSENT PROCESS requires:", opts:["Only verbal agreement from participants","Clear explanation of study details, written or verbal consent without compulsion, and right to withdraw at any time","Signature from the supervisor only","IRB approval before participants are informed"],ans:1, exp:"Informed consent requires clear explanation of study details, written or verbal consent obtained without compulsion, and the right to withdraw at any time."},
+  {lec:9, q:"ETHICAL APPROVAL for a study must be obtained from:", opts:["The research supervisor only","An Institutional Review Board (IRB) or Ethics Committee before starting","The hospital's nursing director","The participants themselves"],ans:1, exp:"All studies must be reviewed and approved by an Institutional Review Board (IRB) or Ethics Committee before starting."},
+  {lec:9, q:"RIGHT OF CONFIDENTIALITY refers to the researcher's ability to:", opts:["Publish all participant details","Keep data source and protect confidentiality of data without altering research","Share data with other researchers freely","Exclude certain participants from the study"],ans:1, exp:"Right of confidentiality means the researcher has ability to keep data source and protect the confidentiality of the data sample of subjects without altering the research."},
+  {lec:9, q:"Which is a way to AVOID potential harm to research participants?", opts:["Excluding participants who complain","Preventing physical harm (fatigue, discomfort), psychological distress, loss of privacy, and loss of time","Publishing participant names in the study","Conducting the study without consent"],ans:1, exp:"Potential harm to avoid includes physical harm (fatigue, discomfort, boredom), psychological distress (fear of unknown), loss of privacy, and loss of time."},
+  {lec:10, q:"How many main components does a thesis have according to the lecture?", opts:["8 components","10 components","16 components","5 components"],ans:2, exp:"A thesis has 16 main components including title, approval sheet, list of abbreviations, abstract, introduction, aim, methodology, results, discussion, conclusion, recommendations, summary, references, appendices, Arabic summary, and Arabic cover."},
+  {lec:10, q:"The ABSTRACT in a thesis:", opts:["Is not required in a thesis","Must be present and is a brief summary of the research","Is only required in a paper, not thesis","Is the same as the introduction"],ans:1, exp:"The abstract must be present in a thesis. It is a brief summary of the research. In a protocol, abstract is NOT present."},
+  {lec:10, q:"The APPROVAL SHEET in a thesis includes:", opts:["The title and keywords only","Supervisor, external and internal examiner, and date of discussion","The researcher's CV","The list of references"],ans:1, exp:"The approval sheet includes supervisor, external and internal examiner, and date of discussion. It must be present in a thesis."},
+  {lec:10, q:"Which of the following is included in the METHODOLOGY section of a thesis?", opts:["Results and discussion","Research design, research setting, sampling, tools of data collection, operational design, and statistical design","Introduction and significance of the study","Summary and recommendations only"],ans:1, exp:"Methodology (subjects and method) includes: research design, research setting, sampling (type, size, technique, criteria), tools of data collection, content validity, ethical consideration, operational design (pilot study, field work), administrative design, and statistical design."},
+  {lec:11, q:"In which document is the APPROVAL SHEET present?", opts:["Protocol only","Thesis only","Paper only","Both protocol and thesis"],ans:1, exp:"Approval sheet is NOT present in protocol or paper. It must be present in the thesis only."},
+  {lec:11, q:"A RESEARCH PAPER is written in:", opts:["Future tense","Present tense","Past tense","Mixed tenses"],ans:2, exp:"A paper should be written in past tense (same as thesis). The protocol is written in future tense 'will'."},
+  {lec:11, q:"The TABLE OF CONTENTS (List of abbreviations, tables, figures, appendices) is found in:", opts:["Protocol only","Thesis only","Paper only","All three: protocol, thesis and paper"],ans:1, exp:"Contents, list of abbreviations, tables, figures, and appendices must be present in the thesis, but are NOT present in the protocol or paper."},
+  {lec:11, q:"An ABSTRACT is present in:", opts:["Protocol only","Thesis only","Both thesis and paper","Protocol and paper only"],ans:2, exp:"Abstract is NOT present in a protocol. It must be present in both thesis and paper."},
+  {lec:11, q:"The ACKNOWLEDGEMENT section:", opts:["Is required in all three: protocol, thesis, and paper","Is not present in the protocol, is present in the thesis, and sometimes present in the paper","Is only present in the protocol","Is not required in any of the three"],ans:1, exp:"Acknowledgement is NOT present in the protocol, is present in the thesis, and is sometimes present or required according to the journal in a paper."},
+  {lec:12, q:"A research critique is defined as:", opts:["A rejection of a research study","A critical and objective appraisal of a research study to assess its strengths and weaknesses","A statistical method for analyzing data","A method of collecting data from participants"],ans:1, exp:"A research critique is a critical and objective appraisal of a research study based on a penetrating and analytical examination by a competent research critic."},
+  {lec:12, q:"The general PURPOSE of a research critique is:", opts:["To reject the research study","To enable the researcher to refine and improve his research endeavors","To find ethical violations only","To replace the peer-review process"],ans:1, exp:"The general purpose of a research critique is to enable the researcher to refine and improve his research endeavors by assessing strengths and weaknesses."},
+  {lec:12, q:"The ELEMENTS of a research critique include:", opts:["Introduction, methodology, results, and discussion","Theoretical, methodological, ethical, and interpretive dimensions","Title, abstract, aim, and references","Data collection, analysis, and sampling"],ans:1, exp:"Elements of a research critique include theoretical dimensions, methodological dimensions, ethical dimensions, and interpretive dimension."},
+  {lec:12, q:"A good research TITLE should NOT exceed:", opts:["5 words","10 words","15 words","20 words"],ans:2, exp:"The research title should NOT be more than 15 words. It should be clear, accurate, concise, novel, and applicable."},
+  {lec:12, q:"During the critique process, the title should NOT contain:", opts:["The topic of the study","Keywords","Abbreviations","Names of variables"],ans:2, exp:"The title should NOT contain any abbreviations. It should be written in capital letters except prepositions."},
+  {lec:12, q:"The ABSTRACT in a research critique should be:", opts:["Written in future tense","Written in past tense and titled","Written in present tense","Not titled"],ans:1, exp:"The abstract should be titled and written in past tense. It is a brief summary of the research."},
+  {lec:13, q:"A CITATION in research is:", opts:["A detailed list at the end of the document","An acknowledgment within the text indicating where specific information came from","A type of data collection method","A statistical technique"],ans:1, exp:"A citation is an acknowledgment within the text of your work that indicates where specific information, ideas, or quotes came from. It is found in the body of the work."},
+  {lec:13, q:"A REFERENCE in a research paper:", opts:["Is found in the body of the text","Is a detailed list at the end of the document of all sources cited","Is the same as a citation","Is only needed for direct quotes"],ans:1, exp:"A reference is a detailed list of all sources cited in your text, placed at the end of your document. It gives full details about cited sources."},
+  {lec:13, q:"In APA citation style for ONE author, the format is:", opts:["(Author, Title, Year)","(Author, Year)","(Year, Author)","Author (Year, page)"],ans:1, exp:"APA in-text citation uses the author's last name and year of publication. For one author: (Mohamed, 2024). For two authors: (Mohamed & Ahmed, 2024). For more than 2: (Mohamed et al., 2024)."},
+  {lec:13, q:"You should use a REFERENCE when:", opts:["Only when quoting directly","When quoting, paraphrasing, using data/statistics/images, or referencing theories","Only in the introduction section","When the information is common knowledge"],ans:1, exp:"You should reference when quoting directly, when paraphrasing ideas, when using data, statistics, or images, and when referencing theories, frameworks, or methodologies."},
+  {lec:13, q:"The MAIN OBJECTIVE of citation is:", opts:["To increase the length of the paper","To acknowledge and give credit to sources, ensure intellectual honesty, and prove the author is not plagiarizing","To impress the reviewer with many references","To avoid writing an introduction"],ans:1, exp:"The main objectives of citation are: to acknowledge and give credit to sources, for intellectual honesty and credibility, to prove the author is not plagiarizing, and to enable readers to follow up."},
+  {lec:13, q:"Types of REFERENCES include:", opts:["Books, journal articles, conference papers, websites, and reports/theses","Only books and journals","Only peer-reviewed articles","Only online sources"],ans:0, exp:"Types of references include: books (complete works/textbooks), journal articles (peer-reviewed), conference papers, websites (online articles, blogs), and reports/theses (government reports, dissertations)."}
+];
+
+const LECS = [
+  {num:1, title:"Lecture 1", sub:"Introduction to Research"},
+  {num:2, title:"Lecture 2", sub:"Research Proposal"},
+  {num:3, title:"Lecture 3", sub:"Problem & Hypothesis"},
+  {num:4, title:"Lecture 4", sub:"Literature Review"},
+  {num:5, title:"Lecture 5", sub:"Research Designs"},
+  {num:6, title:"Lecture 6", sub:"Sampling"},
+  {num:8, title:"Lecture 8", sub:"Validity & Reliability"},
+  {num:9, title:"Lecture 9", sub:"Research Ethics"},
+  {num:10, title:"Lecture 10", sub:"Components of Thesis"},
+  {num:11, title:"Lecture 11", sub:"Protocol vs Thesis vs Paper"},
+  {num:12, title:"Lecture 12", sub:"Research Critique"},
+  {num:13, title:"Lecture 13", sub:"Writing References"}
+];
+
+const LEC_ICONS = {1:'ti-book-2',2:'ti-file-description',3:'ti-help-circle',4:'ti-books',5:'ti-layout-list',6:'ti-users',8:'ti-circle-check',9:'ti-shield-check',10:'ti-notebook',11:'ti-git-compare',12:'ti-magnifier',13:'ti-link'};
+
+let selected = new Set();
+let questions = [];
+let current = 0;
+let score = 0;
+let userAnswers = [];
+let answered = false;
+
+function renderLecGrid() {
+  const grid = document.getElementById('lec-grid');
+  grid.innerHTML = '';
+  LECS.forEach(l => {
+    const btn = document.createElement('button');
+    btn.className = 'lec-btn' + (selected.has(l.num) ? ' active' : '');
+    const icon = LEC_ICONS[l.num] || 'ti-book';
+    btn.innerHTML = `<div class="lec-num"><i class="ti ${icon}" aria-hidden="true"></i> ${l.title}</div><div class="lec-title">${l.sub}</div>`;
+    btn.onclick = () => { toggleLec(l.num, btn); };
+    grid.appendChild(btn);
+  });
+  const allSelected = LECS.every(l => selected.has(l.num));
+  const allBtn = document.createElement('button');
+  allBtn.className = 'select-all-btn' + (allSelected ? ' active' : '');
+  allBtn.innerHTML = allSelected
+    ? '<i class="ti ti-circle-minus" aria-hidden="true"></i> إلغاء تحديد الكل'
+    : '<i class="ti ti-circle-plus" aria-hidden="true"></i> تحديد جميع المحاضرات';
+  allBtn.onclick = () => {
+    if (allSelected) selected.clear(); else LECS.forEach(l => selected.add(l.num));
+    renderLecGrid(); updateStartBtn();
+  };
+  grid.appendChild(allBtn);
+}
+
+function toggleLec(num, btn) {
+  if (selected.has(num)) { selected.delete(num); btn.classList.remove('active'); }
+  else { selected.add(num); btn.classList.add('active'); }
+  updateStartBtn();
+}
+
+function updateStartBtn() {
+  const btn = document.getElementById('start-btn');
+  btn.disabled = selected.size === 0;
+  if (selected.size > 0) btn.innerHTML = `<i class="ti ti-player-play"></i> ابدأ الاختبار (${ALL_QUESTIONS.filter(q=>selected.has(q.lec)).length} سؤال)`;
+  else btn.innerHTML = `<i class="ti ti-player-play"></i> ابدأ الاختبار`;
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i>0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function startQuiz() {
+  const pool = ALL_QUESTIONS.filter(q => selected.has(q.lec));
+  questions = shuffle(pool);
+  current = 0; score = 0; userAnswers = [];
+  document.getElementById('screen-select').style.display = 'none';
+  document.getElementById('screen-quiz').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  const q = questions[current];
+  const total = questions.length;
+  const pct = Math.round((current / total) * 100);
+  const lecData = LECS.find(l => l.num === q.lec);
+  const lecName = lecData ? lecData.sub : '';
+  const lecIcon = LEC_ICONS[q.lec] || 'ti-book';
+
+  document.getElementById('screen-quiz').innerHTML = `
+    <div class="card">
+      <div class="progress-wrap">
+        <div class="progress-top">
+          <span class="progress-label"><i class="ti ${lecIcon}" aria-hidden="true" style="font-size:14px;vertical-align:-2px;margin-left:4px"></i>${lecName}</span>
+          <span class="progress-count">${current+1} / ${total}</span>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="pbar" style="width:${pct}%"></div>
+        </div>
+      </div>
+
+      <div class="question-badge">
+        <i class="ti ti-question-mark" aria-hidden="true"></i>
+        سؤال ${current+1}
+      </div>
+      <div class="question-text">${q.q}</div>
+
+      <div class="options" id="opts">
+        ${q.opts.map((o,i) => `
+          <button class="opt-btn" id="opt${i}" onclick="answer(${i})">
+            <span class="opt-letter">${String.fromCharCode(65+i)}</span>
+            <span>${o}</span>
+          </button>
+        `).join('')}
+      </div>
+
+      <div id="feedback" style="display:none"></div>
+      <div id="next-wrap" style="display:none">
+        <button class="next-btn" onclick="next()">
+          ${current+1===total ? '<i class="ti ti-trophy"></i> عرض النتيجة' : '<i class="ti ti-arrow-left"></i> السؤال التالي'}
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function answer(idx) {
+  if (answered) return;
+  answered = true;
+  const q = questions[current];
+  const correct = idx === q.ans;
+  if (correct) score++;
+  userAnswers.push({q, chosen: idx, correct});
+
+  q.opts.forEach((_,i) => {
+    const btn = document.getElementById('opt'+i);
+    btn.disabled = true;
+    if (i === q.ans) btn.classList.add('correct');
+    else if (i === idx && !correct) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('feedback');
+  fb.style.display = 'flex';
+  fb.className = 'feedback-box ' + (correct ? 'correct' : 'wrong');
+  if (correct) {
+    fb.innerHTML = `<i class="ti ti-circle-check" aria-hidden="true"></i><div>إجابة صحيحة! ${q.exp}</div>`;
+  } else {
+    fb.innerHTML = `<i class="ti ti-circle-x" aria-hidden="true"></i><div>إجابة خاطئة. الإجابة الصحيحة: <strong>${q.opts[q.ans]}</strong><br>${q.exp}</div>`;
+  }
+  document.getElementById('next-wrap').style.display = 'block';
+}
+
+function next() {
+  current++;
+  if (current >= questions.length) showResult();
+  else renderQuestion();
+}
+
+function showResult() {
+  document.getElementById('screen-quiz').style.display = 'none';
+  const res = document.getElementById('screen-result');
+  res.style.display = 'block';
+  const pct = Math.round((score/questions.length)*100);
+  let grade, gradeClass, gradeIcon;
+  if (pct >= 90) { grade = 'ممتاز — A'; gradeClass = 'grade-A'; gradeIcon = 'ti-star'; }
+  else if (pct >= 75) { grade = 'جيد جداً — B'; gradeClass = 'grade-B'; gradeIcon = 'ti-thumb-up'; }
+  else if (pct >= 60) { grade = 'جيد — C'; gradeClass = 'grade-C'; gradeIcon = 'ti-mood-smile'; }
+  else { grade = 'يحتاج مراجعة — D'; gradeClass = 'grade-D'; gradeIcon = 'ti-book-2'; }
+
+  const wrongItems = userAnswers.filter(a => !a.correct);
+  const wrongCount = wrongItems.length;
+  const correctCount = score;
+
+  const pctStyle = `--pct: ${pct}%`;
+
+  res.innerHTML = `
+    <div class="card result-hero">
+      <div class="score-ring" style="${pctStyle}">
+        <div class="score-inner">
+          <div class="score-num">${score}</div>
+          <div class="score-total">من ${questions.length}</div>
+        </div>
+      </div>
+      <div class="score-pct">${pct}%</div>
+      <div class="score-desc">من الإجابات صحيحة</div>
+      <div class="grade-badge ${gradeClass}">
+        <i class="ti ${gradeIcon}" aria-hidden="true"></i>
+        ${grade}
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card stat-correct">
+        <i class="ti ti-circle-check" aria-hidden="true"></i>
+        <div class="stat-val">${correctCount}</div>
+        <div class="stat-lbl">إجابات صحيحة</div>
+      </div>
+      <div class="stat-card stat-wrong">
+        <i class="ti ti-circle-x" aria-hidden="true"></i>
+        <div class="stat-val">${wrongCount}</div>
+        <div class="stat-lbl">إجابات خاطئة</div>
+      </div>
+      <div class="stat-card stat-pct">
+        <i class="ti ti-percentage" aria-hidden="true"></i>
+        <div class="stat-val">${pct}%</div>
+        <div class="stat-lbl">النسبة المئوية</div>
+      </div>
+    </div>
+
+    ${wrongItems.length > 0 ? `
+    <div class="card" style="padding:1.25rem">
+      <div class="section-label">
+        <i class="ti ti-alert-circle"></i>
+        الأسئلة التي أخطأت فيها (${wrongCount})
+      </div>
+      <div class="review-list">
+        ${wrongItems.map(a => `
+          <div class="review-item">
+            <div class="ri-q"><i class="ti ti-circle-x" aria-hidden="true"></i>${a.q.q}</div>
+            <div class="ri-row ri-wrong"><i class="ti ti-x" aria-hidden="true"></i><span>إجابتك: ${a.q.opts[a.chosen]}</span></div>
+            <div class="ri-row ri-correct"><i class="ti ti-check" aria-hidden="true"></i><span>الصحيح: ${a.q.opts[a.q.ans]}</span></div>
+            <div class="ri-exp">${a.q.exp}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    ` : `
+    <div class="card all-correct">
+      <i class="ti ti-trophy" aria-hidden="true"></i>
+      <span>أحسنت! أجبت على جميع الأسئلة بشكل صحيح 🎉</span>
+    </div>
+    `}
+
+    <button class="restart-btn" onclick="restart()">
+      <i class="ti ti-refresh" aria-hidden="true"></i>
+      إعادة الاختبار
+    </button>
+  `;
+}
+
+function restart() {
+  document.getElementById('screen-result').style.display = 'none';
+  document.getElementById('screen-select').style.display = 'block';
+}
+
+document.getElementById('start-btn').onclick = startQuiz;
+renderLecGrid();
+</script>
+</html>
