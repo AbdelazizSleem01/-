@@ -51,7 +51,7 @@
     margin: 0 auto;
   }
 
-  /* ── Header ── */
+  /*  Header  */
   .app-header {
     text-align: center;
     margin-bottom: 2rem;
@@ -74,7 +74,7 @@
     font-size: 14px; color: var(--text-secondary);
   }
 
-  /* ── Card ── */
+  /*  Card  */
   .card {
     background: var(--card);
     border-radius: var(--radius);
@@ -84,7 +84,7 @@
     margin-bottom: 1.25rem;
   }
 
-  /* ── Section label ── */
+  /*  Section label  */
   .section-label {
     display: flex; align-items: center; gap: 8px;
     font-size: 13px; font-weight: 600;
@@ -95,7 +95,7 @@
   }
   .section-label i { font-size: 16px; }
 
-  /* ── Lecture Grid ── */
+  /*  Lecture Grid  */
   .lec-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -169,7 +169,7 @@
   .select-all-btn:hover { border-color: var(--primary-mid); color: var(--primary); background: var(--primary-light); }
   .select-all-btn.active { border-color: var(--primary-mid); color: var(--primary-dark); background: var(--primary-light); border-style: solid; }
 
-  /* ── Start Button ── */
+  /*  Start Button  */
   .start-btn {
     display: flex; align-items: center; justify-content: center; gap: 10px;
     width: 100%;
@@ -199,7 +199,7 @@
   }
   .start-btn i { font-size: 20px; }
 
-  /* ── Progress ── */
+  /*  Progress  */
   .progress-wrap {
     margin-bottom: 1.25rem;
   }
@@ -222,7 +222,7 @@
     transition: width 0.4s ease;
   }
 
-  /* ── Question ── */
+  /*  Question  */
   .question-badge {
     display: inline-flex; align-items: center; gap: 6px;
     font-size: 12px; font-weight: 600;
@@ -240,8 +240,9 @@
     line-height: 1.7;
     margin-bottom: 1.25rem;
   }
+  .question-text.ltr { direction: ltr; text-align: left; }
 
-  /* ── Options ── */
+  /*  Options  */
   .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.25rem; }
   .opt-btn {
     padding: 13px 16px;
@@ -258,6 +259,7 @@
     display: flex; align-items: center; gap: 12px;
     line-height: 1.5;
   }
+  .opt-btn.ltr { direction: ltr; text-align: left; justify-content: flex-start; }
   .opt-btn .opt-letter {
     min-width: 30px; height: 30px;
     background: var(--bg);
@@ -297,7 +299,7 @@
     color: #fff;
   }
 
-  /* ── Feedback ── */
+  /*  Feedback  */
   .feedback-box {
     padding: 14px 16px;
     border-radius: var(--radius-sm);
@@ -319,7 +321,7 @@
     color: var(--danger);
   }
 
-  /* ── Next Button ── */
+  /*  Next Button  */
   .next-btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 11px 22px;
@@ -335,8 +337,62 @@
   }
   .next-btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
   .next-btn i { font-size: 16px; }
+  .quiz-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: 10px;
+    align-items: center;
+    margin-top: 6px;
+    direction: ltr;
+  }
+  .quiz-footer .ghost-btn,
+  .quiz-footer .next-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  @media (max-width: 640px) {
+    .quiz-footer {
+      grid-template-columns: 1fr;
+    }
+  }
+  .toast {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f7a3b;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+  }
+  .toast.show { opacity: 1; }
+  .quiz-topbar {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 8px;
+  }
+  .back-home-btn {
+    border: 1px solid #d6e3f3;
+    background: #f6faff;
+    color: #175a9a;
+    border-radius: 999px;
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .back-home-btn:hover { background: #eaf3ff; }
 
-  /* ── Result ── */
+  /*  Result  */
   .result-hero {
     text-align: center;
     padding: 2rem 1rem;
@@ -395,7 +451,7 @@
   .stat-wrong i { color: var(--danger-border); }
   .stat-pct i { color: var(--primary-mid); }
 
-  /* ── Review ── */
+  /*  Review  */
   .review-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.25rem; }
   .review-item {
     padding: 14px 16px;
@@ -419,7 +475,7 @@
   .ri-correct i { color: var(--success-border); }
   .ri-exp { font-size: 12px; color: var(--text-secondary); margin-top: 8px; padding-top: 8px; border-top: 0.5px solid var(--border-light); }
 
-  /* ── Restart ── */
+  /*  Restart  */
   .restart-btn {
     display: flex; align-items: center; justify-content: center; gap: 10px;
     width: 100%;
@@ -449,6 +505,57 @@
   .all-correct i { font-size: 40px; color: var(--success-border); }
 
   .divider { border: none; border-top: 0.5px solid var(--border-light); margin: 1rem 0; }
+  .quiz-options { display:flex; gap:10px; align-items:center; margin:12px 0 14px; }
+  .quiz-options label { font-weight:700; font-size:14px; color:var(--text-main); }
+  .quiz-options select {
+    flex:1;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:10px 12px;
+    font-family:'Cairo',sans-serif;
+    background:#fff;
+    color:var(--text-main);
+  }
+  .saved-stats {
+    margin-top: 12px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    background: #f8fbff;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--text-soft);
+  }
+  .saved-stats strong { color: var(--text-main); }
+  .timer-chip {
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:#eef5ff;
+    color:#124f8f;
+    border:1px solid #d5e6fb;
+    border-radius:999px;
+    padding:4px 10px;
+    font-weight:700;
+    font-size:12px;
+  }
+  .review-actions {
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+    margin-bottom:12px;
+  }
+  .ghost-btn {
+    flex:1;
+    border:1px solid #c7dbf3;
+    background:#f4f9ff;
+    color:#165c9f;
+    border-radius:10px;
+    padding:10px 12px;
+    font-family:'Cairo',sans-serif;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .ghost-btn:disabled { opacity:.6; cursor:not-allowed; }
 </style>
 
 <div id="app">
@@ -467,10 +574,24 @@
         اختر المحاضرات
       </div>
       <div class="lec-grid" id="lec-grid"></div>
+      <div class="quiz-options">
+        <label for="timer-select">المؤقت:</label>
+        <select id="timer-select">
+          <option value="0">بدون مؤقت</option>
+          <option value="600">10 دقائق</option>
+          <option value="1200">20 دقيقة</option>
+          <option value="1800">30 دقيقة</option>
+        </select>
+      </div>
       <button class="start-btn" id="start-btn" disabled>
         <i class="ti ti-player-play"></i>
         ابدأ الاختبار
       </button>
+      <button class="ghost-btn" id="resume-btn" style="margin-top:10px;display:none">
+        <i class="ti ti-player-track-next"></i>
+        استكمال المحاولة المحفوظة
+      </button>
+      <div class="saved-stats" id="progress-stats"></div>
     </div>
   </div>
 
@@ -483,8 +604,8 @@
 
 <script>
 const ALL_QUESTIONS = [
-  {lec:1, q:"What is the definition of 'Research' according to the book?", opts:["A creative and systematic work undertaken to increase the stock of knowledge","A clinical method used only in hospitals","A process of treating patients based on evidence","A method of teaching nursing students"],ans:0, exp:"Research is defined as creative and systematic work to increase knowledge — involving collection, organization, and analysis of evidence."},
-  {lec:1, q:"The word 'Re' in research means:", opts:["Repeat the same work","New, once again, or fresh","Review older studies","Reject current theories"],ans:1, exp:"'Re' means new, once again, or fresh — and 'Search' means to look for or examine something closely."},
+  {lec:1, q:"What is the definition of 'Research' according to the book?", opts:["A creative and systematic work undertaken to increase the stock of knowledge","A clinical method used only in hospitals","A process of treating patients based on evidence","A method of teaching nursing students"],ans:0, exp:"Research is defined as creative and systematic work to increase knowledge  involving collection, organization, and analysis of evidence."},
+  {lec:1, q:"The word 'Re' in research means:", opts:["Repeat the same work","New, once again, or fresh","Review older studies","Reject current theories"],ans:1, exp:"'Re' means new, once again, or fresh  and 'Search' means to look for or examine something closely."},
   {lec:1, q:"Which of the following is an example of a DEPENDENT variable?", opts:["Maternal age in a pregnancy study","Cigarette smoking in a lung cancer study","Lung cancer in a smoking study","Teaching strategy in a nursing intervention"],ans:2, exp:"The dependent variable is the outcome (condition/disease) that depends on or is caused by the independent variable. Lung cancer depends on smoking."},
   {lec:1, q:"Which characteristic is NOT a criterion of good research?", opts:["Begins with a clearly defined purpose","Replicable","Based on researcher's personal opinion only","Uses valid and reliable data collection tools"],ans:2, exp:"Good research must be objective and systematic, not based on personal opinion. It must be evidence-based and unbiased."},
   {lec:1, q:"The scope of nursing research includes:", opts:["Only laboratory research","Clinical research, health systems research, and nursing education research","Administrative work and budget planning","Patient counselling and bedside care only"],ans:1, exp:"Nursing research encompasses clinical research, health systems and outcomes research, and nursing education research."},
@@ -507,7 +628,7 @@ const ALL_QUESTIONS = [
   {lec:3, q:"A good research problem should:", opts:["Be based only on the researcher's curiosity","Address a knowledge gap and be significant enough to contribute to existing research","Be as broad as possible to cover many topics","Avoid data collection challenges"],ans:1, exp:"A good research problem should address a knowledge gap, be significant, lead to further research, and be of interest to the researcher."},
   {lec:3, q:"Which is NOT a source of research problems?", opts:["Practical experience in nursing practice","Previous research","Personal income of the researcher","Technological change"],ans:2, exp:"Sources of research problems include practical experience, daily problems, previous research, existing theories, technological change, unexplored areas, etc."},
   {lec:3, q:"A null hypothesis implies:", opts:["A strong positive relationship between variables","That there is no relation or statistical difference between variables or groups","A causal relationship exists","The independent variable affects the dependent variable"],ans:1, exp:"The null hypothesis implies there is no relation or statistical difference between variables or groups."},
-  {lec:3, q:"A directional (alternative) hypothesis states:", opts:["There is no difference between groups","A specific predicted direction of the relationship or difference between variables","Only the null hypothesis is false","Variables are not related"],ans:1, exp:"A directional hypothesis predicts a specific direction — e.g., 'The experimental group will score higher than the control group.'"},
+  {lec:3, q:"A directional (alternative) hypothesis states:", opts:["There is no difference between groups","A specific predicted direction of the relationship or difference between variables","Only the null hypothesis is false","Variables are not related"],ans:1, exp:"A directional hypothesis predicts a specific direction  e.g., 'The experimental group will score higher than the control group.'"},
   {lec:3, q:"A good hypothesis must be:", opts:["Vague and open to interpretation","Testable, simple, stated in present tense, and expressed as a declarative sentence","Always stated as a null hypothesis","Based solely on the researcher's opinion"],ans:1, exp:"A good hypothesis must be testable with available resources, simple (one relationship), in present tense, and a declarative sentence."},
   {lec:3, q:"The research AIM is:", opts:["A broad overview of the background of the study","A specific, measurable statement of what the researcher intends to achieve","A summary of past findings","An overview of statistical methods"],ans:1, exp:"The aim is what the researcher intends to achieve from the research. It is a specific, measurable intention."},
   {lec:4, q:"A literature review is best defined as:", opts:["A statistical tool for data analysis","A critical summary and analysis of published studies about a specific topic","A method of sampling participants","An ethical requirement for research"],ans:1, exp:"A literature review is a critical summary and analysis of published knowledge, theories, and findings about a specific research topic."},
@@ -516,7 +637,7 @@ const ALL_QUESTIONS = [
   {lec:4, q:"A literature review is organized:", opts:["From the oldest to the most recent study only","From broad and general to specific and narrow","Alphabetically by author","By the length of the study"],ans:1, exp:"Literature review is organized from general to specific. It begins with broad background and narrows to the specific problem."},
   {lec:5, q:"Which research design involves randomly assigning participants to groups?", opts:["Descriptive design","Experimental design","Retrospective design","Cross-sectional design"],ans:1, exp:"Experimental design involves random assignment to experimental and control groups. It is used to test cause-and-effect relationships."},
   {lec:5, q:"A cross-sectional study collects data:", opts:["Over a long period of time","At one point in time","Before and after an intervention","Only from control groups"],ans:1, exp:"Cross-sectional studies collect data at one point in time. They are used to describe prevalence or relationships at a single moment."},
-  {lec:5, q:"A retrospective study examines:", opts:["Future outcomes of a current intervention","Past records or experiences to understand a current outcome","Current behavior of two matched groups","The same group over several years"],ans:1, exp:"Retrospective studies look backward — starting from an outcome (e.g., a disease) and tracing back to find potential causes."},
+  {lec:5, q:"A retrospective study examines:", opts:["Future outcomes of a current intervention","Past records or experiences to understand a current outcome","Current behavior of two matched groups","The same group over several years"],ans:1, exp:"Retrospective studies look backward  starting from an outcome (e.g., a disease) and tracing back to find potential causes."},
   {lec:5, q:"Which design is used when the researcher cannot manipulate variables for ethical reasons?", opts:["Experimental","Quasi-experimental","Non-experimental / Descriptive","Longitudinal"],ans:2, exp:"Non-experimental (descriptive) designs are used when manipulation is impossible or unethical. The researcher observes without intervening."},
   {lec:6, q:"The POPULATION in research refers to:", opts:["Only the participants who agreed to join the study","The entire group of individuals who share common characteristics relevant to the research question","The experimental group only","A subset of the sample"],ans:1, exp:"Population is the entire group sharing common characteristics relevant to the study. The sample is drawn from this population."},
   {lec:6, q:"RANDOM SAMPLING means:", opts:["The researcher selects the most convenient participants","Every member of the population has an equal chance of being selected","Participants self-select into the study","Participants are selected based on specific criteria"],ans:1, exp:"In random sampling, every member of the population has an equal and independent chance of being selected. It reduces selection bias."},
@@ -528,7 +649,7 @@ const ALL_QUESTIONS = [
   {lec:8, q:"Cronbach's Alpha is used to measure:", opts:["Content validity","Internal consistency reliability","Criterion validity","Test-retest reliability"],ans:1, exp:"Cronbach's Alpha measures internal consistency reliability. A value of r > 0.7 indicates acceptable reliability."},
   {lec:9, q:"Nursing Research Ethics is defined as:", opts:["The process of obtaining funding for research","The act of moral principles which the researcher follows to ensure rights and welfare of individuals under study","A type of research design","The method of writing references"],ans:1, exp:"Nursing Research Ethics can be defined as the act of moral principles which the researcher has to follow while conducting nursing research to ensure the rights and welfare of individuals, groups, or communities under study."},
   {lec:9, q:"The RIGHT OF SELF-DETERMINATION means:", opts:["The researcher decides who participates in the study","Participants have the right to decide voluntary participation or termination and refuse to give information at any time","The IRB approves the study design","Data is kept confidential"],ans:1, exp:"The right of self-determination means participants have the right to decide voluntary participation or termination and refuse to give information at any time."},
-  {lec:9, q:"RIGHT OF BENEFICENCE means:", opts:["Participants can withdraw at any time","Establishing a positive risk/benefits ratio — risk should never exceed the benefit for people","Fair treatment and maintenance of privacy","Equality in distribution of benefits"],ans:1, exp:"Right of Beneficence means establishing a positive risk/benefits ratio which ensures the risk of research should never exceed the benefit for people from knowledge generated by research activity."},
+  {lec:9, q:"RIGHT OF BENEFICENCE means:", opts:["Participants can withdraw at any time","Establishing a positive risk/benefits ratio  risk should never exceed the benefit for people","Fair treatment and maintenance of privacy","Equality in distribution of benefits"],ans:1, exp:"Right of Beneficence means establishing a positive risk/benefits ratio which ensures the risk of research should never exceed the benefit for people from knowledge generated by research activity."},
   {lec:9, q:"The INFORMED CONSENT PROCESS requires:", opts:["Only verbal agreement from participants","Clear explanation of study details, written or verbal consent without compulsion, and right to withdraw at any time","Signature from the supervisor only","IRB approval before participants are informed"],ans:1, exp:"Informed consent requires clear explanation of study details, written or verbal consent obtained without compulsion, and the right to withdraw at any time."},
   {lec:9, q:"ETHICAL APPROVAL for a study must be obtained from:", opts:["The research supervisor only","An Institutional Review Board (IRB) or Ethics Committee before starting","The hospital's nursing director","The participants themselves"],ans:1, exp:"All studies must be reviewed and approved by an Institutional Review Board (IRB) or Ethics Committee before starting."},
   {lec:9, q:"RIGHT OF CONFIDENTIALITY refers to the researcher's ability to:", opts:["Publish all participant details","Keep data source and protect confidentiality of data without altering research","Share data with other researchers freely","Exclude certain participants from the study"],ans:1, exp:"Right of confidentiality means the researcher has ability to keep data source and protect the confidentiality of the data sample of subjects without altering the research."},
@@ -556,6 +677,194 @@ const ALL_QUESTIONS = [
   {lec:13, q:"Types of REFERENCES include:", opts:["Books, journal articles, conference papers, websites, and reports/theses","Only books and journals","Only peer-reviewed articles","Only online sources"],ans:0, exp:"Types of references include: books (complete works/textbooks), journal articles (peer-reviewed), conference papers, websites (online articles, blogs), and reports/theses (government reports, dissertations)."}
 ];
 
+const IMPORTED_QUESTIONS = [
+  {lec:1, q:"In the etymology of the word \"Research,\" what is the specific meaning of the prefix \"Re\"?", opts:["To investigate or examine","New, once again, or fresh","To look for something hidden","To test, try, or prove"], ans:1, exp:"In the curriculum, 'Re' is defined as new, once again, or fresh."},
+  {lec:1, q:"Which of the following best defines \"Nursing Research\" according to the curriculum?", opts:["A non-systematic problem-solving technique for administrative use","Creative work undertaken primarily to satisfy academic degree requirements","A systematic inquiry designed to develop knowledge about issues of importance to nurses","The clinical application of medical protocols without empirical questioning"], ans:2, exp:"Nursing research is a systematic inquiry designed to develop knowledge about issues important to nurses."},
+  {lec:1, q:"According to the definitions provided in the curriculum, what is the primary distinction between \"Data\" and \"Information\"?", opts:["Data has an established purpose, whereas information is raw fact.","Data refers to processed facts, while information refers to raw measurements.","Information is the raw material from which data is eventually synthesized.","Data refers to raw facts with no specific meaning, while information is processed data with a purpose."], ans:3, exp:"Data is raw facts; information is processed data with meaning and purpose."},
+  {lec:1, q:"The term \"Information\" is derived from which Latin root word?", opts:["Datum","Researche","Informatio","Ratio"], ans:2, exp:"The term information is derived from the Latin root 'informatio'."},
+  {lec:1, q:"In research terminology, which concept indicates only the nature and extent of linear relationship between two or more comparable objects?", opts:["Regression","Causality","Correlation","Variable"], ans:2, exp:"Correlation indicates the nature and extent of a linear relationship."},
+  {lec:1, q:"What is the primary focus of \"Regression\" in scientific inquiry?", opts:["The symmetry between variables X and Y","The impact of the independent variable on the dependent variable for predictions","Determining the dictionary definition of a clinical phenomenon","Ensuring the study design is interesting and motivating to the researcher"], ans:1, exp:"Regression focuses on estimating/predicting dependent variable changes from independent variable changes."},
+  {lec:1, q:"Which of the following is an established role for nurses in the research process?", opts:["Deferring research dissemination to medical staff","Identifying evidence-based practices (EBP)","Avoiding research conferences to maintain clinical focus","Discouraging patient participation in clinical trials to ensure safety"], ans:1, exp:"Nurses contribute by identifying and applying EBP and participating in research activities."},
+  {lec:1, q:"While both are systematic methods of problem-solving, the \"Assessment\" phase of the Nursing Process is most analogous to which step in the Research Process?", opts:["Applying an intervention","Identifying a phenomenon","Analysis of results","Formulation of recommendations"], ans:1, exp:"Assessment in nursing process corresponds to identifying the problem/phenomenon in research."},
+  {lec:3, q:"How is a \"Research Problem\" defined within the context of scientific inquiry?", opts:["A concise and concrete summary of the research study","An area of concern or a gap in existing knowledge that points to a need for further investigation","The final statistical results of a completed study","An annotated bibliography of sources found in a library"], ans:1, exp:"A research problem is a concern or knowledge gap that needs investigation."},
+  {lec:3, q:"A research problem statement should typically follow which organizational flow?", opts:["Stating the final conclusion first","Beginning with a broad topic and narrowing down to a specific question","Listing the names and credentials of the research team","Documenting the complete list of references used in the proposal"], ans:1, exp:"Problem statements commonly move from broad context to specific issue/question."},
+  {lec:3, q:"Which of the following is a characteristic of a good research problem?", opts:["It should be unresolvable using current technological resources.","It should address a knowledge gap and be ethical.","It should be based on personal bias rather than professional issues.","It should avoid the necessity of an operational definition."], ans:1, exp:"A good problem is meaningful, ethical, and addresses a true gap."},
+  {lec:3, q:"Which of the following is NOT typically cited as a source for identifying a research problem in nursing?", opts:["Practical experience in nursing practice","Existing theories or technological changes","Personal feelings or unsubstantiated intuition","Unexplored areas or discussion with supervisors"], ans:2, exp:"Personal feelings without evidence are not a valid source for a research problem."},
+  {lec:3, q:"A researcher writes: \"To what extent does blood glucose level influence the incidence of pneumonia among diabetic patients?\" This is an example of which problem format?", opts:["Declarative form","SMART form","Interrogative form","Null form"], ans:2, exp:"Because it is posed as a question, this is an interrogative form."},
+  {lec:3, q:"When formulating research objectives, the S in the SMART acronym stands for:", opts:["Systematic","Simple","Scientific","Specific"], ans:3, exp:"In SMART, S stands for Specific."},
+  {lec:3, q:"What is the primary definition of a \"Research Hypothesis\"?", opts:["A final proof of a universal scientific law","A tentative statement or prediction asserting a relationship between variables","A summary of the literature review findings","The socio-demographic profile of the study participants"], ans:1, exp:"A hypothesis is a tentative, testable prediction about relationships between variables."},
+  {lec:3, q:"Which of the following is a primary function of a hypothesis?", opts:["To increase the operational costs of the research project","To preclude the need for statistical analysis","To provide the map that guides and explores the phenomenon under consideration","To replace the necessity of a formal research design"], ans:2, exp:"The hypothesis guides the study and focuses data collection and analysis."},
+  {lec:3, q:"The Independent Variable is technically defined as:", opts:["The outcome or condition being measured (e.g., disease state)","The variable believed to cause or influence the dependent variable (e.g., a treatment)","A variable that remains static and unmeasured throughout the study","An extraneous variable that is ignored during data collection"], ans:1, exp:"Independent variable is the presumed cause or predictor."},
+  {lec:3, q:"In a study investigating if smoking causes lung cancer, lung cancer represents the:", opts:["Independent variable","Control variable","Dependent variable","Confounding variable"], ans:2, exp:"Lung cancer is the outcome, so it is the dependent variable."},
+  {lec:3, q:"A Simple Hypothesis predicts the relationship between:", opts:["Two independent and two dependent variables","One independent variable and one dependent variable","Multiple independent variables only","Variables that lack measurable attributes"], ans:1, exp:"Simple hypothesis links one independent with one dependent variable."},
+  {lec:3, q:"Which type of hypothesis predicts that there exists a relationship between two or more independent and dependent variables?", opts:["Simple hypothesis","Null hypothesis","Complex hypothesis","Non-directional hypothesis"], ans:2, exp:"Complex hypothesis involves multiple independent and/or dependent variables."},
+  {lec:3, q:"A Null Hypothesis (H0) implies that:", opts:["There is a strong positive correlation between variables.","There is no relation or statistical difference between variables or groups.","The independent variable is the sole cause of the outcome.","The researcher's bias has influenced the findings."], ans:1, exp:"H0 states no statistically significant relationship or difference."},
+  {lec:3, q:"There will be a negative correlation between the nurse's performance and patients' immobilized complications. This is an example of a:", opts:["Null hypothesis","Non-directional hypothesis","Directional hypothesis","Complex hypothesis"], ans:2, exp:"It specifies direction (negative), so it is directional."},
+  {lec:3, q:"If a researcher predicts a relationship among variables but does not specify whether that relationship is positive or negative, they are using a:", opts:["Directional hypothesis","Non-directional hypothesis","Causal hypothesis","Simple independent statement"], ans:1, exp:"No stated direction means non-directional hypothesis."},
+  {lec:3, q:"In the example Two hourly position changes of fully bedridden patients will prevent bedsores, what is the independent variable?", opts:["Bedsores","Prevention","Two hourly position changes","Fully bedridden patients"], ans:2, exp:"The intervention/predictor is two-hourly position changes."},
+  {lec:3, q:"In the topic Maternal age is associated with pregnancy complications, what is the independent variable?", opts:["Pregnancy complications","Maternal age","Association","Clinical setting"], ans:1, exp:"Maternal age is the predictor (independent variable)."},
+  {lec:2, q:"A Research Proposal is defined as a:", opts:["Summary of the final results of a completed study","Future plan showing how to apply or clarify the steps of research","Annotated bibliography of all books in a university library","Collection of raw data sheets for analysis"], ans:1, exp:"A proposal is a forward-looking plan of how research steps will be conducted."},
+  {lec:2, q:"According to the SMART characteristics of a successful proposal, the R stands for:", opts:["Rigorous","Reliable (realistic)","Random","Research-oriented"], ans:1, exp:"In this course framing, R refers to reliable/realistic."},
+  {lec:2, q:"What is the initial step in the research proposal process?", opts:["Creating a final title","Formulating research objectives","Selecting the area or general topic of interest according to specialty","Conducting a pilot study"], ans:2, exp:"The first step is choosing the general area/topic relevant to specialty."},
+  {lec:12, q:"When critiquing a research title that exceeds one line, it must be formatted as:", opts:["A justified block","An inverted pyramid","A set of bullet points","A single continuous string of text"], ans:1, exp:"In critique guidance, a long title is written in inverted pyramid style."},
+  {lec:12, q:"Which rule applies to the capitalization of words in a research proposal title?", opts:["All words must be capitalized including prepositions.","No words should be capitalized except the first.","Title words are capitalized except for prepositions.","Only nouns and verbs are capitalized."], ans:2, exp:"Common course rule: capitalize title words except prepositions."},
+  {lec:2, q:"In a research protocol, the document must be written primarily in which tense?", opts:["Past tense","Present tense","Future tense (will)","Past perfect tense"], ans:2, exp:"Protocols are generally written in future tense (will)."},
+  {lec:4, q:"What is the primary purpose of a Literature Review?", opts:["To prove the researcher is widely read","To convey to readers the work already done and the knowledge established on a topic","To compile a list of unrelated medical texts","To provide the socio-demographic profile of the study sample"], ans:1, exp:"Literature review summarizes existing knowledge and highlights what is known."},
+  {lec:4, q:"Which of the following is considered a Primary Source in a literature review?", opts:["An encyclopedia","A medical dictionary","Information where the author reports their own original work","A textbook interpreting the findings of multiple researchers"], ans:2, exp:"Primary sources present original research from the author(s)."},
+  {lec:4, q:"A Secondary Source is defined as:", opts:["The raw data collected during field work","Authors summarizing and interpreting the findings of work done by others","A direct interview with a study participant","A laboratory diagnostic result"], ans:1, exp:"Secondary sources interpret/summarize primary studies."},
+  {lec:4, q:"Which organizational pattern for a literature review organizes material by the specific dates the research was published?", opts:["Topical Order","Problem-Cause-Solution","General to Specific Order","Chronological Order"], ans:3, exp:"Chronological order arranges studies by publication time."},
+  {lec:4, q:"Organizing a literature review by beginning with broad-based research and then narrowing focus to specific studies related to the topic is known as:", opts:["Topical Order","General to specific order","Chronological Order","Conceptual frameworking"], ans:1, exp:"This is general-to-specific organization."},
+  {lec:4, q:"Which of the following is identified as a common pitfall of a literature review?", opts:["Including up-to-date references","Limited range or irrelevant material","Utilizing primary sources","Organizing by main topics or issues"], ans:1, exp:"A narrow or irrelevant review is a common pitfall."},
+  {lec:5, q:"Research Design is best defined as:", opts:["The process of organizing a bibliography","A step-by-step procedure or scheme adopted before data collection to achieve objectives","The list of questions used in a structured interview","The ethical consent form provided to participants"], ans:1, exp:"Research design is the planned framework/procedure before data collection."},
+  {lec:5, q:"What is a primary purpose of implementing a rigorous research design?", opts:["To maximize the chance of researcher bias","To increase the waste of administrative resources","To provide a scheme for answering questions and maintain control to avoid bias","To ensure that the research study cannot be replicated"], ans:2, exp:"A sound design controls bias and supports valid answers."},
+  {lec:5, q:"According to the curriculum, which design is appropriate if the goal is to describe the relation between variables or collect data regarding the variable of the title?", opts:["Quasi-experimental design","Intervention study design","Descriptive study design","Qualitative-only design"], ans:2, exp:"Descriptive designs are used to describe variables/relationships without intervention."},
+  {lec:5, q:"A Quasi-experimental design is specifically categorized as an:", opts:["Exploratory study design","Intervention study design","Observational-only design","Retrospective study design"], ans:1, exp:"Quasi-experimental is an intervention design without full randomization."},
+  {lec:6, q:"Which two types of sampling are specifically mentioned in the research protocol section?", opts:["Random or Systematic","Convenient or Purposive","Primary or Secondary","Clustered or Stratified"], ans:1, exp:"The section highlights convenient and purposive sampling."},
+  {lec:2, q:"A Pilot Study is typically conducted on what percentage of the total sample?", opts:["1%","5%","10%","25%"], ans:2, exp:"Pilot studies are typically done on 10% of the total sample in this curriculum."},
+  {lec:8, q:"In the context of data collection tools, Validity refers to:", opts:["The stability of the tool over a long duration","Whether the tools test what they are intended to test","The total number of questions in the instrument","The font size and layout of the questionnaire"], ans:1, exp:"Validity means the tool measures what it intends to measure."},
+  {lec:8, q:"Reliability in research instrumentation is tested to ensure:", opts:["The tool is aesthetically pleasing to the participants","The consistency and stability of the measurement","That the tool contains at least 50 items","That no external experts were consulted during development"], ans:1, exp:"Reliability is about consistency/stability of measurement."},
+  {lec:8, q:"When utilizing the Jury method for content validity, the tool should be evaluated by:", opts:["One general staff nurse","The entire study population","Three experts in the specialty","The hospital administrator only"], ans:2, exp:"Content validity jury often uses three field experts."},
+  {lec:2, q:"A self-administered questionnaire typically consists of two parts. Part A is usually concerned with:", opts:["Knowledge-related data regarding the topic","Socio-demographic data (name, age, sex, etc.)","The statistical analysis of the findings","The list of used references"], ans:1, exp:"Part A commonly captures socio-demographic characteristics."},
+  {lec:9, q:"Which of the following is a standard Ethical Consideration in nursing research?", opts:["Making participant identities public for transparency","Requiring participants to complete the study regardless of their desire to stop","Informed consent and the right to withdraw at any time","Sharing private participant data with the general public"], ans:2, exp:"Core ethics include informed consent and right to withdraw."},
+  {lec:13, q:"How must the References section of a research paper be organized?", opts:["By the order in which they appear in the text","Alphabetically","By the professional rank of the author","From the most recent to the oldest date"], ans:1, exp:"References are usually organized alphabetically by author."},
+  {lec:2, q:"According to the content of research proposal/protocol, what is the correct sequence of the first five major components?", opts:["Title, Methodology, Results, Discussion, Aim","Title, Introduction/Significance, Aim/Hypothesis, Methodology, Results","Introduction, Methodology, Title, Discussion, Aim","Aim, Title, Significance, Results, Methodology"], ans:1, exp:"The correct early order is Title, Introduction/Significance, Aim/Hypothesis, Methodology, then Results."}
+];
+
+const existingImported = new Set(ALL_QUESTIONS.map(q => q.q.trim().toLowerCase()));
+for (const q of IMPORTED_QUESTIONS) {
+  const key = q.q.trim().toLowerCase();
+  if (!existingImported.has(key)) {
+    ALL_QUESTIONS.push(q);
+    existingImported.add(key);
+  }
+}
+
+const OCR_ADDED_QUESTIONS = [
+  {lec:5, q:"A major purpose of experimental research design is to:", opts:["Describe prevalence only","Investigate cause-and-effect relationships between variables","Summarize references alphabetically","Compare citation styles"], ans:1, exp:"Experimental designs are used to test causal relationships between variables."},
+  {lec:5, q:"Which of the following is listed under non-experimental designs?", opts:["Quasi-experimental only","Descriptive, cross-sectional, and longitudinal designs","Randomized controlled trial only","Laboratory intervention only"], ans:1, exp:"The lecture lists descriptive, cross-sectional, and longitudinal among non-experimental designs."},
+  {lec:5, q:"A cross-sectional design is best described as:", opts:["Following participants for many years","Collecting data at one specific point in time","Randomly assigning interventions","Analyzing only past hospital records"], ans:1, exp:"Cross-sectional studies collect data at a single point in time."},
+  {lec:5, q:"One factor affecting selection of research design is:", opts:["Researcher's favorite color","Purpose of the study","Participant handwriting style","Reference font size"], ans:1, exp:"Selection depends on factors including study purpose and nature of the research problem."},
+
+  {lec:6, q:"Sampling is the process of:", opts:["Selecting all members of the population","Selecting a representative group from the population","Writing questionnaire items only","Analyzing results before data collection"], ans:1, exp:"Sampling means choosing a representative subset from the population."},
+  {lec:6, q:"A key advantage of sampling is that it:", opts:["Always removes all bias","Saves time and money compared with studying the whole population","Eliminates the need for ethics approval","Guarantees 100% accuracy"], ans:1, exp:"Sampling is faster and less costly than surveying the entire population."},
+  {lec:6, q:"Convenience sampling is a type of:", opts:["Probability sampling","Non-probability sampling","Systematic random sampling","Cluster randomization"], ans:1, exp:"Convenience sampling is categorized as non-probability sampling."},
+  {lec:6, q:"Snowball sampling is especially useful when:", opts:["The target characteristic is rare and participants refer others","A full population list is available","Random assignment is required","Only one clinic is studied"], ans:0, exp:"Snowball sampling is used for hard-to-reach or rare populations via referrals."},
+
+  {lec:8, q:"Reliability in measurement mainly refers to:", opts:["Visual attractiveness of the tool","Consistency and stability of results","Number of items only","Using only closed-ended questions"], ans:1, exp:"Reliability is about obtaining consistent results under similar conditions."},
+  {lec:8, q:"Validity in research instrumentation refers to:", opts:["Tool cost-effectiveness only","Whether the tool measures what it is intended to measure","Speed of data entry","Participant satisfaction only"], ans:1, exp:"Validity reflects how well a tool measures the intended construct."},
+  {lec:8, q:"Which of these is a recognized type of validity in the lecture?", opts:["Face validity","Budget validity","Schedule validity","Color validity"], ans:0, exp:"The lecture highlights face/content/construct/criterion validity types."},
+  {lec:8, q:"Which can threaten internal validity?", opts:["Careful protocol writing","History and maturation effects","Using pilot study","Clearly stated objectives"], ans:1, exp:"History and maturation are classic threats to internal validity."},
+
+  {lec:9, q:"The right of justice in research ethics emphasizes:", opts:["Fast recruitment only","Fair treatment, privacy, and equitable distribution of risks/benefits","Only researcher benefit","Avoiding informed consent"], ans:1, exp:"Justice requires fairness and balanced distribution of risks and benefits."},
+  {lec:9, q:"The main role of a research ethics committee is to:", opts:["Approve grammar in the proposal","Protect participants' rights, dignity, safety, and wellbeing","Write the literature review","Choose statistical software"], ans:1, exp:"Ethics committees review studies to protect participants."},
+  {lec:9, q:"Ethical rigor should be considered in:", opts:["Sampling and data collection only","All research steps including sampling, collection, analysis, and reporting","Title formatting only","References section only"], ans:1, exp:"Ethics applies across the full research process."},
+  {lec:9, q:"Informed consent primarily supports participants' right to:", opts:["Mandatory participation","Voluntary participation with clear study information","Skip confidentiality protections","Share private identifiers publicly"], ans:1, exp:"Informed consent ensures voluntary participation with adequate information."},
+
+  {lec:10, q:"Which of the following is a component of a thesis?", opts:["Approval sheet","Protocol budget only","Randomization table only","Peer-review decision letter"], ans:0, exp:"The thesis components include an approval sheet among core sections."},
+  {lec:10, q:"In thesis writing, the abstract is:", opts:["Not required","A mandatory brief summary of the study","Only used in protocol","Replaced by recommendations"], ans:1, exp:"The thesis abstract is an essential concise summary."},
+  {lec:10, q:"Which sequence better matches thesis structure?", opts:["Results before methodology","Title, abstract, introduction, aim, methodology, results","References before title","Discussion before data collection"], ans:1, exp:"Core thesis flow includes title/abstract/introduction/aim/methodology/results."},
+  {lec:10, q:"Appendices in thesis commonly include:", opts:["Only participant names","Protocol copies and tools of data collection","Exam answer keys","Hospital payroll"], ans:1, exp:"Appendices often contain protocol and study instruments/tools."},
+
+  {lec:11, q:"A protocol is typically written in:", opts:["Future tense (will)","Past tense only","Poetic style","Bullet points only"], ans:0, exp:"The lecture states protocol is written in future tense."},
+  {lec:11, q:"A thesis and a paper are usually written in:", opts:["Future tense only","Past tense","No tense consistency","Present perfect only"], ans:1, exp:"Thesis and paper are typically presented in past tense."},
+  {lec:11, q:"Which item is present in thesis but not usually in protocol?", opts:["Approval sheet","Research title","Methodology","References"], ans:0, exp:"Approval sheet is a thesis-specific component compared with protocol."},
+  {lec:11, q:"Authors in a paper should be:", opts:["Randomly ordered","Ethically arranged according to contribution","Alphabetical by first name only","Listed by age"], ans:1, exp:"Author order should reflect ethical contribution practices."},
+
+  {lec:12, q:"A research critique is best described as:", opts:["Rejecting a paper without reading","Critical and objective appraisal of strengths and weaknesses","Copying results into a summary","Replacing statistical analysis"], ans:1, exp:"Critique is a structured objective appraisal of a study."},
+  {lec:12, q:"Which is one element of research critique?", opts:["Theoretical dimensions","Printing dimensions","Color dimensions","Marketing dimensions"], ans:0, exp:"The lecture includes theoretical, methodological, ethical, and interpretive dimensions."},
+  {lec:12, q:"In title critique, a good research title should be:", opts:["Long and ambiguous","Clear, concise, and relevant","Full of abbreviations","Without key variables"], ans:1, exp:"Good titles are clear, concise, and relevant to the study."},
+  {lec:12, q:"Methodology critique checks whether design is:", opts:["Appropriate to title and research question","Identical across all studies","Always experimental","Independent of ethics"], ans:0, exp:"A key critique point is alignment of design with title/question."},
+
+  {lec:13, q:"Referencing is mainly used to:", opts:["Increase word count only","Acknowledge information sources and avoid plagiarism","Replace discussion section","Avoid reading primary studies"], ans:1, exp:"References provide credit and traceability for used sources."},
+  {lec:13, q:"A citation appears:", opts:["Only in appendices","Within the body text near borrowed information","Only on title page","Only in abstract"], ans:1, exp:"Citations are in-text acknowledgments tied to ideas/data/quotes."},
+  {lec:13, q:"A reference list is placed:", opts:["At the end of the work","At the beginning before title","Inside each table only","Only in acknowledgments"], ans:0, exp:"References are compiled at the end of the document."},
+  {lec:13, q:"APA style for one author in-text citation is:", opts:["(Author, Year)","(Year, Title)","Author-Year-Page without brackets","(Author; Title)"], ans:0, exp:"The basic APA in-text form for one author is (Author, Year)."}
+];
+
+for (const q of OCR_ADDED_QUESTIONS) {
+  const key = q.q.trim().toLowerCase();
+  if (!existingImported.has(key)) {
+    ALL_QUESTIONS.push(q);
+    existingImported.add(key);
+  }
+}
+
+const MORE_QUESTIONS_4_TO_13 = [
+  {lec:4, q:"One key function of literature review is to:", opts:["Replace sampling design","Identify research gaps and justify the current study","Provide final conclusions before data collection","Eliminate need for references"], ans:1, exp:"Literature review helps identify gaps and justify why the study is needed."},
+  {lec:4, q:"When organizing literature by theme, the most suitable approach is:", opts:["Random order","Topical order by major issues","Only alphabetical by author","Only by page count"], ans:1, exp:"Topical organization groups studies by concepts/issues."},
+  {lec:4, q:"Using outdated and irrelevant studies in literature review is considered:", opts:["Best practice","A common pitfall","A sign of strong methodology","Equivalent to primary evidence"], ans:1, exp:"Irrelevant or outdated sources weaken the review quality."},
+  {lec:4, q:"A primary source in research is one where the author:", opts:["Summarizes others only","Reports original work directly","Writes a dictionary definition","Posts opinion without data"], ans:1, exp:"Primary sources are original studies by the author(s)."},
+
+  {lec:5, q:"A quasi-experimental study is usually selected when:", opts:["Random assignment is always possible","Intervention exists but full randomization is limited","No variables are measured","Only qualitative interviews are needed"], ans:1, exp:"Quasi-experimental designs test interventions without full random assignment."},
+  {lec:5, q:"Research design is prepared primarily:", opts:["After final results","Before data collection starts","Only after publication","Only for ethics rejection"], ans:1, exp:"Design is a pre-data-collection plan guiding the whole study."},
+  {lec:5, q:"Longitudinal design differs from cross-sectional because it:", opts:["Uses no variables","Tracks changes over time","Requires no sample","Cannot study relationships"], ans:1, exp:"Longitudinal studies follow changes over multiple time points."},
+
+  {lec:6, q:"In probability sampling, members of the population:", opts:["Have equal known chance of selection","Are selected by convenience only","Must self-volunteer","Are chosen by referrals only"], ans:0, exp:"Probability sampling provides known/equal selection chance."},
+  {lec:6, q:"Systematic sampling typically selects:", opts:["Every kth unit after a start point","Only first and last participants","Only volunteers","Only one cluster"], ans:0, exp:"Systematic sampling uses a fixed interval (k)."},
+  {lec:6, q:"Purposive sampling is best described as:", opts:["Strict random lottery","Intentional selection based on relevant characteristics","Automatic software selection","Selecting every third person"], ans:1, exp:"Purposive sampling selects participants who match study-relevant criteria."},
+
+  {lec:8, q:"Content validity is commonly established through:", opts:["Participant age matching","Expert panel/jury review","Increasing sample size only","Removing all open questions"], ans:1, exp:"Content validity is assessed by experts judging item relevance/coverage."},
+  {lec:8, q:"A reliable instrument should yield:", opts:["Different results each time","Consistent results under similar conditions","Only significant p-values","Only high participant satisfaction"], ans:1, exp:"Reliability indicates measurement consistency."},
+  {lec:8, q:"Cronbach's alpha is mainly used for:", opts:["External validity","Internal consistency reliability","Sampling adequacy","Face validity"], ans:1, exp:"Cronbach's alpha estimates internal consistency."},
+
+  {lec:9, q:"Confidentiality in nursing research means:", opts:["Publishing participant identities","Protecting participant data and privacy","Skipping informed consent","Sharing raw identifiers publicly"], ans:1, exp:"Confidentiality protects identity/data from unauthorized disclosure."},
+  {lec:9, q:"The right to withdraw allows participants to:", opts:["Leave study at any point without penalty","Modify study hypothesis","Access other participants' files","Approve statistical tests"], ans:0, exp:"Participants can withdraw anytime as an ethical right."},
+  {lec:9, q:"Ethical approval should be obtained:", opts:["After data analysis","Before starting the study","Only for theses not papers","Only if sample > 100"], ans:1, exp:"IRB/ethics approval is required before conducting the study."},
+
+  {lec:10, q:"Which section interprets study findings against literature?", opts:["Discussion","Title page","Sampling frame","Abstract keywords"], ans:0, exp:"Discussion section explains findings and compares with prior literature."},
+  {lec:10, q:"Recommendations in thesis are usually based on:", opts:["Research findings and implications","Author preference only","Formatting style","Journal logo"], ans:0, exp:"Recommendations should follow from study evidence."},
+  {lec:10, q:"A thesis cover typically includes:", opts:["Title and author/supervisor details","Only references","Only appendices","Only ethics code"], ans:0, exp:"Cover contains identifying thesis information."},
+
+  {lec:11, q:"In protocol vs thesis comparison, abstract is usually:", opts:["Absent in protocol, present in thesis","Present only in protocol","Absent in all","Present only in appendices"], ans:0, exp:"Abstract is generally not in protocol but required in thesis/paper."},
+  {lec:11, q:"Acknowledgment section is usually:", opts:["Mandatory in protocol","Common in thesis and may appear in paper","Required in references","Forbidden in theses"], ans:1, exp:"Acknowledgment is typically thesis-based and journal-dependent for papers."},
+  {lec:11, q:"Methodology tense in completed research reports is mostly:", opts:["Future","Past","Imperative","No tense"], ans:1, exp:"Completed studies are usually written in past tense."},
+
+  {lec:12, q:"A critique checklist often examines whether the research question is:", opts:["Clearly stated and aligned with aim","Hidden for neutrality","Unrelated to objectives","Identical across all studies"], ans:0, exp:"Good critique assesses clarity and alignment of question/aim/design."},
+  {lec:12, q:"Ethical dimension in critique focuses on:", opts:["Color scheme of tables","Consent, privacy, risk-benefit, and fairness","Only sample size","Only citation count"], ans:1, exp:"Ethical critique reviews participant rights and protections."},
+  {lec:12, q:"Interpretive dimension in critique deals with:", opts:["How results are explained and conclusions justified","How pages are numbered","Only abstract length","Only title font"], ans:0, exp:"Interpretive critique checks logic of conclusions from results."},
+
+  {lec:13, q:"Plagiarism risk is reduced when researchers:", opts:["Use proper citation and reference practices","Avoid all references","Copy with minor wording changes","Use only website sources"], ans:0, exp:"Correct attribution is central to plagiarism prevention."},
+  {lec:13, q:"When paraphrasing an author's idea, you should:", opts:["Skip citation if wording changed","Cite the source in-text","Only add to bibliography without citation","Use quotation marks without source"], ans:1, exp:"Paraphrased ideas still require citation."},
+  {lec:13, q:"A complete reference entry should help readers:", opts:["Find the original source reliably","Guess the source title","Skip source verification","Replace literature review"], ans:0, exp:"References provide enough details to locate source material."}
+];
+
+for (const q of MORE_QUESTIONS_4_TO_13) {
+  const key = q.q.trim().toLowerCase();
+  if (!existingImported.has(key)) {
+    ALL_QUESTIONS.push(q);
+    existingImported.add(key);
+  }
+}
+
+const MIN15_TOPUP_QUESTIONS = [
+  {lec:4, q:"A high-quality literature review should be:", opts:["Comprehensive, relevant, and logically organized","Limited to one textbook","Focused on unrelated topics","Free from any citation"], ans:0, exp:"Good literature reviews are comprehensive, relevant, current, and well organized."},
+
+  {lec:6, q:"A sampling frame is:", opts:["The final data analysis table","A list/source from which the sample is drawn","The informed consent form","Only the exclusion criteria"], ans:1, exp:"Sampling frame is the accessible list of population units used for sampling."},
+  {lec:6, q:"Cluster sampling generally involves:", opts:["Selecting every kth person only","Selecting groups/clusters first, then sampling within them","Only purposive participant choice","No need for a population definition"], ans:1, exp:"Cluster sampling selects clusters then units from those clusters."},
+  {lec:6, q:"Sample size is commonly influenced by:", opts:["Precision level, study type, and available resources","Researcher's handwriting","Color of questionnaire","Only participant gender"], ans:0, exp:"Sample size depends on methodological and practical factors like precision and resources."},
+
+  {lec:8, q:"Construct validity evaluates whether the tool:", opts:["Looks professional only","Actually measures the intended theoretical construct","Has many questions","Is easy to print"], ans:1, exp:"Construct validity examines whether scores reflect the intended construct."},
+
+  {lec:10, q:"The methodology section usually includes:", opts:["Design, setting, sampling, tools, and analysis plan","Only title and abstract","Only limitations","Only references"], ans:0, exp:"Methodology covers core procedural components of the study."},
+  {lec:10, q:"A conclusion section should primarily:", opts:["Introduce new unrelated data","Summarize key findings in relation to objectives","Replace results tables","List all abbreviations"], ans:1, exp:"Conclusion synthesizes the main findings and links them to objectives."},
+  {lec:10, q:"Arabic summary in thesis is generally:", opts:["A translation of the English summary","A list of references only","Optional notes from students","A replacement for abstract"], ans:0, exp:"Arabic summary is typically the translated summary of the thesis."},
+  {lec:10, q:"An approval sheet in thesis usually includes:", opts:["Examiner/supervisor approvals and discussion details","Only study setting photos","Only sample size","Only keywords"], ans:0, exp:"Approval sheet documents official academic approval details."},
+
+  {lec:11, q:"Compared with protocol, a paper usually contains:", opts:["Completed results and discussion","Only future objectives","No methodology at all","No references"], ans:0, exp:"Papers report completed work including results/discussion."},
+  {lec:11, q:"In a protocol, recommendations are usually:", opts:["Final evidence-based recommendations","Planned/anticipated, while final recommendations come after results","The longest section","Written without objectives"], ans:1, exp:"Definitive recommendations are typically based on completed findings."},
+  {lec:11, q:"A key comparison point among protocol, thesis, and paper is:", opts:["Tense, sections included, and level of completion","Font size only","Cover color only","No structural differences"], ans:0, exp:"They differ by purpose, structure, and writing tense/completeness."},
+
+  {lec:13, q:"Citation and reference differ because:", opts:["Citation is in-text; reference is full source detail at end","Both are identical and interchangeable","Reference appears in title only","Citation is optional for paraphrasing"], ans:0, exp:"Citation points in-text; reference gives full bibliographic details."}
+];
+
+for (const q of MIN15_TOPUP_QUESTIONS) {
+  const key = q.q.trim().toLowerCase();
+  if (!existingImported.has(key)) {
+    ALL_QUESTIONS.push(q);
+    existingImported.add(key);
+  }
+}
+
 const LECS = [
   {num:1, title:"Lecture 1", sub:"Introduction to Research"},
   {num:2, title:"Lecture 2", sub:"Research Proposal"},
@@ -579,6 +888,12 @@ let current = 0;
 let score = 0;
 let userAnswers = [];
 let answered = false;
+let reviewOnlyWrong = false;
+let timeExpired = false;
+let timerConfig = { durationSec: 0, remainingSec: 0, handle: null };
+let suppressResultSave = false;
+const STORAGE_KEY = 'nursing_quiz_history_v2';
+const ACTIVE_QUIZ_KEY = 'nursing_quiz_active_v1';
 
 function renderLecGrid() {
   const grid = document.getElementById('lec-grid');
@@ -629,15 +944,22 @@ function shuffle(arr) {
 function startQuiz() {
   const pool = ALL_QUESTIONS.filter(q => selected.has(q.lec));
   questions = shuffle(pool);
-  current = 0; score = 0; userAnswers = [];
+  current = 0;
+  score = 0;
+  userAnswers = new Array(questions.length).fill(null);
+  reviewOnlyWrong = false;
+  timeExpired = false;
+  initTimer();
   document.getElementById('screen-select').style.display = 'none';
   document.getElementById('screen-quiz').style.display = 'block';
   renderQuestion();
+  saveActiveProgress();
 }
 
 function renderQuestion() {
-  answered = false;
+  answered = !!userAnswers[current];
   const q = questions[current];
+  const isLikelyEnglish = /^[\x00-\x7F\s\W]+$/.test(q.q);
   const total = questions.length;
   const pct = Math.round((current / total) * 100);
   const lecData = LECS.find(l => l.num === q.lec);
@@ -646,10 +968,18 @@ function renderQuestion() {
 
   document.getElementById('screen-quiz').innerHTML = `
     <div class="card">
+      <div class="quiz-topbar">
+        <button class="back-home-btn" onclick="goHomeFromQuiz()" title="Back to Home" aria-label="Back to Home">
+          <i class="ti ti-arrow-left"></i>
+        </button>
+      </div>
       <div class="progress-wrap">
         <div class="progress-top">
           <span class="progress-label"><i class="ti ${lecIcon}" aria-hidden="true" style="font-size:14px;vertical-align:-2px;margin-left:4px"></i>${lecName}</span>
-          <span class="progress-count">${current+1} / ${total}</span>
+          <span class="progress-count">
+            ${timerConfig.durationSec > 0 ? `<span class="timer-chip"><i class="ti ti-clock" aria-hidden="true"></i><span id="timer-text">${formatTime(timerConfig.remainingSec)}</span></span>` : ''}
+            ${current+1} / ${total}
+          </span>
         </div>
         <div class="progress-bar-wrap">
           <div class="progress-bar" id="pbar" style="width:${pct}%"></div>
@@ -660,11 +990,11 @@ function renderQuestion() {
         <i class="ti ti-question-mark" aria-hidden="true"></i>
         سؤال ${current+1}
       </div>
-      <div class="question-text">${q.q}</div>
+      <div class="question-text ${isLikelyEnglish ? 'ltr' : ''}">${q.q}</div>
 
       <div class="options" id="opts">
         ${q.opts.map((o,i) => `
-          <button class="opt-btn" id="opt${i}" onclick="answer(${i})">
+          <button class="opt-btn ${isLikelyEnglish ? 'ltr' : ''}" id="opt${i}" onclick="answer(${i})">
             <span class="opt-letter">${String.fromCharCode(65+i)}</span>
             <span>${o}</span>
           </button>
@@ -672,31 +1002,44 @@ function renderQuestion() {
       </div>
 
       <div id="feedback" style="display:none"></div>
-      <div id="next-wrap" style="display:none">
-        <button class="next-btn" onclick="next()">
-          ${current+1===total ? '<i class="ti ti-trophy"></i> عرض النتيجة' : '<i class="ti ti-arrow-left"></i> السؤال التالي'}
+      <div class="quiz-footer" id="next-wrap">
+        <button class="ghost-btn" onclick="prevQuestion()" ${current===0 ? 'disabled' : ''}>
+          <i class="ti ti-arrow-left"></i> Previous
+        </button>
+        <button class="ghost-btn" id="save-progress-btn" onclick="saveActiveProgress(true)">
+          <i class="ti ti-device-floppy"></i> Save Progress
+        </button>
+        <button class="next-btn" onclick="${current+1===total ? 'showResult()' : 'next()'}">
+          ${current+1===total ? '<i class="ti ti-trophy"></i> Finish Quiz' : '<i class="ti ti-arrow-right"></i> Next'}
         </button>
       </div>
     </div>
   `;
+
+  if (userAnswers[current]) {
+    paintAnswerState(userAnswers[current].chosen);
+  }
 }
 
 function answer(idx) {
-  if (answered) return;
-  answered = true;
   const q = questions[current];
   const correct = idx === q.ans;
-  if (correct) score++;
-  userAnswers.push({q, chosen: idx, correct});
+  userAnswers[current] = {q, chosen: idx, correct, unanswered: false};
+  score = recalculateScore();
+  paintAnswerState(idx);
+  saveActiveProgress();
+}
 
+function paintAnswerState(idx) {
+  const q = questions[current];
   q.opts.forEach((_,i) => {
     const btn = document.getElementById('opt'+i);
-    btn.disabled = true;
+    btn.classList.remove('correct', 'wrong');
     if (i === q.ans) btn.classList.add('correct');
-    else if (i === idx && !correct) btn.classList.add('wrong');
+    else if (i === idx && idx !== q.ans) btn.classList.add('wrong');
   });
-
   const fb = document.getElementById('feedback');
+  const correct = idx === q.ans;
   fb.style.display = 'flex';
   fb.className = 'feedback-box ' + (correct ? 'correct' : 'wrong');
   if (correct) {
@@ -704,23 +1047,33 @@ function answer(idx) {
   } else {
     fb.innerHTML = `<i class="ti ti-circle-x" aria-hidden="true"></i><div>إجابة خاطئة. الإجابة الصحيحة: <strong>${q.opts[q.ans]}</strong><br>${q.exp}</div>`;
   }
-  document.getElementById('next-wrap').style.display = 'block';
 }
 
 function next() {
   current++;
-  if (current >= questions.length) showResult();
-  else renderQuestion();
+  if (current >= questions.length) { current = questions.length - 1; showResult(); return; }
+  renderQuestion();
+  saveActiveProgress();
+}
+
+function prevQuestion() {
+  if (current === 0) return;
+  current--;
+  renderQuestion();
+  saveActiveProgress();
 }
 
 function showResult() {
+  stopTimer();
+  clearActiveProgress();
   document.getElementById('screen-quiz').style.display = 'none';
   const res = document.getElementById('screen-result');
   res.style.display = 'block';
+  userAnswers = questions.map((q, i) => userAnswers[i] || {q, chosen: null, correct: false, unanswered: true});
   const pct = Math.round((score/questions.length)*100);
   let grade, gradeClass, gradeIcon;
   if (pct >= 90) { grade = 'ممتاز — A'; gradeClass = 'grade-A'; gradeIcon = 'ti-star'; }
-  else if (pct >= 75) { grade = 'جيد جداً — B'; gradeClass = 'grade-B'; gradeIcon = 'ti-thumb-up'; }
+  else if (pct >= 75) { grade = 'جيد جدًا — B'; gradeClass = 'grade-B'; gradeIcon = 'ti-thumb-up'; }
   else if (pct >= 60) { grade = 'جيد — C'; gradeClass = 'grade-C'; gradeIcon = 'ti-mood-smile'; }
   else { grade = 'يحتاج مراجعة — D'; gradeClass = 'grade-D'; gradeIcon = 'ti-book-2'; }
 
@@ -735,7 +1088,7 @@ function showResult() {
       <div class="score-ring" style="${pctStyle}">
         <div class="score-inner">
           <div class="score-num">${score}</div>
-          <div class="score-total">من ${questions.length}</div>
+          <div class="score-total"> ${questions.length}</div>
         </div>
       </div>
       <div class="score-pct">${pct}%</div>
@@ -774,17 +1127,21 @@ function showResult() {
         ${wrongItems.map(a => `
           <div class="review-item">
             <div class="ri-q"><i class="ti ti-circle-x" aria-hidden="true"></i>${a.q.q}</div>
-            <div class="ri-row ri-wrong"><i class="ti ti-x" aria-hidden="true"></i><span>إجابتك: ${a.q.opts[a.chosen]}</span></div>
+            <div class="ri-row ri-wrong"><i class="ti ti-x" aria-hidden="true"></i><span>إجابتك: ${a.unanswered ? 'لم تتم الإجابة' : a.q.opts[a.chosen]}</span></div>
             <div class="ri-row ri-correct"><i class="ti ti-check" aria-hidden="true"></i><span>الصحيح: ${a.q.opts[a.q.ans]}</span></div>
             <div class="ri-exp">${a.q.exp}</div>
           </div>
         `).join('')}
       </div>
+      <div class="review-actions">
+        <button class="ghost-btn" onclick="retryWrongOnly()">   </button>
+        <button class="ghost-btn" onclick="toggleFullReview()">/  </button>
+      </div>
     </div>
     ` : `
     <div class="card all-correct">
       <i class="ti ti-trophy" aria-hidden="true"></i>
-      <span>أحسنت! أجبت على جميع الأسئلة بشكل صحيح 🎉</span>
+      <span>أحسنت! أجبت على جميع الأسئلة بشكل صحيح</span>
     </div>
     `}
 
@@ -793,14 +1150,254 @@ function showResult() {
       إعادة الاختبار
     </button>
   `;
+
+  if (timeExpired) {
+    res.insertAdjacentHTML('afterbegin', '<div class="timer-chip" style="margin-bottom:10px"><i class="ti ti-alert-triangle"></i>     </div>');
+  }
+
+  if (reviewOnlyWrong) {
+    const btn = res.querySelector('.ghost-btn[onclick="toggleFullReview()"]');
+    if (btn) btn.textContent = '  ';
+  }
+
+  if (!reviewOnlyWrong) {
+    res.insertAdjacentHTML('beforeend', `
+      <div class="card" style="padding:1.25rem;margin-top:12px">
+        <div class="section-label"><i class="ti ti-list-details"></i>  </div>
+        <div class="review-list">
+          ${userAnswers.map((a, idx) => `
+            <div class="review-item">
+              <div class="ri-q"><i class="ti ${a.correct ? 'ti-circle-check' : 'ti-circle-x'}" aria-hidden="true"></i>${idx + 1}: ${a.q.q}</div>
+              <div class="ri-row ${a.correct ? 'ri-correct' : 'ri-wrong'}"><i class="ti ${a.correct ? 'ti-check' : 'ti-x'}" aria-hidden="true"></i><span>: ${a.unanswered ? '  ' : a.q.opts[a.chosen]}</span></div>
+              <div class="ri-row ri-correct"><i class="ti ti-check" aria-hidden="true"></i><span>: ${a.q.opts[a.q.ans]}</span></div>
+              <div class="ri-exp">${a.q.exp}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `);
+  }
+
+  if (!suppressResultSave) {
+    saveAttempt({
+      date: new Date().toISOString(),
+      total: questions.length,
+      correct: correctCount,
+      wrong: wrongCount,
+      pct,
+      lectures: Array.from(selected),
+      timed: timerConfig.durationSec > 0,
+      timedOut: timeExpired
+    });
+    renderSavedStats();
+  }
 }
 
 function restart() {
+  stopTimer();
+  clearActiveProgress();
   document.getElementById('screen-result').style.display = 'none';
   document.getElementById('screen-select').style.display = 'block';
 }
 
+function goHomeFromQuiz() {
+  saveActiveProgress();
+  stopTimer();
+  document.getElementById('screen-quiz').style.display = 'none';
+  document.getElementById('screen-result').style.display = 'none';
+  document.getElementById('screen-select').style.display = 'block';
+  showToast('Saved. You can resume anytime.');
+  refreshResumeButton();
+}
+
+function retryWrongOnly() {
+  const wrongItems = userAnswers.filter(a => !a.correct);
+  if (wrongItems.length === 0) return;
+  questions = shuffle(wrongItems.map(a => a.q));
+  current = 0;
+  score = 0;
+  userAnswers = new Array(questions.length).fill(null);
+  reviewOnlyWrong = true;
+  timeExpired = false;
+  initTimer();
+  document.getElementById('screen-result').style.display = 'none';
+  document.getElementById('screen-quiz').style.display = 'block';
+  renderQuestion();
+  saveActiveProgress();
+}
+
+function toggleFullReview() {
+  reviewOnlyWrong = !reviewOnlyWrong;
+  suppressResultSave = true;
+  showResult();
+  suppressResultSave = false;
+}
+
+function formatTime(sec) {
+  const s = Math.max(0, sec);
+  const mm = String(Math.floor(s / 60)).padStart(2, '0');
+  const ss = String(s % 60).padStart(2, '0');
+  return `${mm}:${ss}`;
+}
+
+function initTimer() {
+  stopTimer();
+  const selectedSec = Number(document.getElementById('timer-select')?.value || 0);
+  timerConfig.durationSec = Number.isFinite(selectedSec) ? selectedSec : 0;
+  timerConfig.remainingSec = timerConfig.durationSec;
+  if (timerConfig.durationSec <= 0) return;
+  timerConfig.handle = setInterval(() => {
+    timerConfig.remainingSec -= 1;
+    const t = document.getElementById('timer-text');
+    if (t) t.textContent = formatTime(timerConfig.remainingSec);
+    if (timerConfig.remainingSec <= 0) {
+      timeExpired = true;
+      stopTimer();
+      showResult();
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  if (timerConfig.handle) {
+    clearInterval(timerConfig.handle);
+    timerConfig.handle = null;
+  }
+}
+
+function readHistory() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch {
+    return [];
+  }
+}
+
+function saveAttempt(record) {
+  const history = readHistory();
+  history.unshift(record);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(history.slice(0, 30)));
+}
+
+function renderSavedStats() {
+  const box = document.getElementById('progress-stats');
+  if (!box) return;
+  const history = readHistory();
+  if (history.length === 0) {
+    box.innerHTML = '<strong>لا يوجد سجل بعد.</strong> ابدأ أول اختبار وسيتم حفظ تقدمك تلقائيًا.';
+    return;
+  }
+  const recent = history.slice(0, 5);
+  const avg = Math.round(recent.reduce((s, r) => s + r.pct, 0) / recent.length);
+  const best = Math.max(...history.map(r => r.pct));
+  box.innerHTML = `<strong>تقدمك المحفوظ:</strong> ${history.length} محاولة | متوسط آخر ${recent.length}: <strong>${avg}%</strong> | أعلى نتيجة: <strong>${best}%</strong>`;
+}
+
+function recalculateScore() {
+  return userAnswers.filter(a => a && a.correct).length;
+}
+
+function saveActiveProgress(showMsg = false) {
+  try {
+    const payload = {
+      selected: Array.from(selected),
+      questions,
+      current,
+      userAnswers,
+      score: recalculateScore(),
+      timerConfig: { durationSec: timerConfig.durationSec, remainingSec: timerConfig.remainingSec }
+    };
+    localStorage.setItem(ACTIVE_QUIZ_KEY, JSON.stringify(payload));
+    const verify = localStorage.getItem(ACTIVE_QUIZ_KEY);
+    if (!verify) throw new Error('Save failed');
+    const resumeBtn = document.getElementById('resume-btn');
+    if (resumeBtn) resumeBtn.style.display = 'inline-flex';
+    if (showMsg) {
+      const saveBtn = document.getElementById('save-progress-btn');
+      if (saveBtn) {
+        const original = saveBtn.innerHTML;
+        saveBtn.innerHTML = '<i class="ti ti-check"></i> Saved';
+        setTimeout(() => { saveBtn.innerHTML = original; }, 1200);
+      }
+      showToast('Progress saved successfully');
+    }
+    return true;
+  } catch (e) {
+    if (showMsg) showToast('Save failed. Please try again.');
+    return false;
+  }
+}
+
+function clearActiveProgress() {
+  localStorage.removeItem(ACTIVE_QUIZ_KEY);
+  const btn = document.getElementById('resume-btn');
+  if (btn) btn.style.display = 'none';
+}
+
+function loadActiveProgress() {
+  try {
+    const raw = localStorage.getItem(ACTIVE_QUIZ_KEY);
+    if (!raw) return false;
+    const data = JSON.parse(raw);
+    if (!data || !Array.isArray(data.questions) || data.questions.length === 0) return false;
+    selected = new Set(Array.isArray(data.selected) ? data.selected : []);
+    questions = data.questions;
+    current = Math.max(0, Math.min((data.current || 0), questions.length - 1));
+    userAnswers = Array.isArray(data.userAnswers) ? data.userAnswers : new Array(questions.length).fill(null);
+    score = typeof data.score === 'number' ? data.score : recalculateScore();
+    reviewOnlyWrong = false;
+    timeExpired = false;
+    timerConfig.durationSec = data.timerConfig?.durationSec || 0;
+    timerConfig.remainingSec = data.timerConfig?.remainingSec || timerConfig.durationSec;
+    stopTimer();
+    if (timerConfig.durationSec > 0) {
+      timerConfig.handle = setInterval(() => {
+        timerConfig.remainingSec -= 1;
+        const t = document.getElementById('timer-text');
+        if (t) t.textContent = formatTime(timerConfig.remainingSec);
+        if (timerConfig.remainingSec <= 0) {
+          timeExpired = true;
+          stopTimer();
+          showResult();
+        }
+      }, 1000);
+    }
+    document.getElementById('screen-select').style.display = 'none';
+    document.getElementById('screen-result').style.display = 'none';
+    document.getElementById('screen-quiz').style.display = 'block';
+    renderQuestion();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function refreshResumeButton() {
+  const btn = document.getElementById('resume-btn');
+  if (!btn) return;
+  const hasSaved = !!localStorage.getItem(ACTIVE_QUIZ_KEY);
+  btn.style.display = hasSaved ? 'inline-flex' : 'none';
+}
+
+function showToast(message) {
+  let toast = document.getElementById('app-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'app-toast';
+    toast.className = 'toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => toast.classList.remove('show'), 1800);
+}
+
 document.getElementById('start-btn').onclick = startQuiz;
+document.getElementById('resume-btn').onclick = () => loadActiveProgress();
 renderLecGrid();
+renderSavedStats();
+refreshResumeButton();
 </script>
 </html>
+
