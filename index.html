@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Methods of Research Quiz</title>
-<meta name="description" content="اختبار تفاعلي لمقرر Methods of Research - طرق البحث التمريضي."/>
+<meta name="description" content="اختبار تفاعلي لمقرر Methods of Research - طرق البحث التمريضي، مع حفظ التقدم واستكمال المحاولة."/>
 <meta name="keywords" content="Methods of Research, Nursing Research, Quiz, MCQ, طرق البحث, التمريض"/>
 <meta name="author" content="Methods of Research Quiz"/>
 <meta name="theme-color" content="#185FA5"/>
@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root {
     --primary: #185FA5;
@@ -551,6 +552,16 @@
     color: var(--text-soft);
   }
   .saved-stats strong { color: var(--text-main); }
+  .student-id-wrap { margin-top: 10px; }
+  .student-id-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    background: #fff;
+  }
   .timer-chip {
     display:inline-flex;
     align-items:center;
@@ -620,6 +631,9 @@
         <i class="ti ti-restore"></i>
         استكمال المحاولة المحفوظة
       </button>
+      <div class="student-id-wrap">
+        <input id="student-id" class="student-id-input" type="text" placeholder="Student ID (for cloud save/resume)"/>
+      </div>
       <div class="saved-stats" id="progress-stats"></div>
     </div>
   </div>
@@ -928,6 +942,10 @@ let timerConfig = { durationSec: 0, remainingSec: 0, handle: null };
 let suppressResultSave = false;
 const STORAGE_KEY = 'nursing_quiz_history_v2';
 const ACTIVE_QUIZ_KEY = 'nursing_quiz_active_v1';
+const STUDENT_ID_KEY = 'nursing_student_id_v1';
+const SUPABASE_URL = 'https://vhdxwztvfjlltrqfyldp.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_UNLGbWRqIs8nokKP-mbLsg_IlRV_iN9';
+const supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) || null;
 
 function renderLecGrid() {
   const grid = document.getElementById('lec-grid');
@@ -1333,7 +1351,7 @@ function recalculateScore() {
   return userAnswers.filter(a => a && a.correct).length;
 }
 
-function saveActiveProgress(showMsg = false) {
+async function saveActiveProgress(showMsg = false) {
   try {
     const payload = {
       selected: Array.from(selected),
@@ -1346,6 +1364,18 @@ function saveActiveProgress(showMsg = false) {
     localStorage.setItem(ACTIVE_QUIZ_KEY, JSON.stringify(payload));
     const verify = localStorage.getItem(ACTIVE_QUIZ_KEY);
     if (!verify) throw new Error('Save failed');
+    const studentId = getStudentId();
+    if (supabaseClient && studentId) {
+      const { error } = await supabaseClient
+        .from('quiz_progress')
+        .upsert({
+          student_id: studentId,
+          progress_json: payload,
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'student_id' });
+      if (error) throw error;
+    }
+
     const resumeBtn = document.getElementById('resume-btn');
     if (resumeBtn) resumeBtn.style.display = 'inline-flex';
     if (showMsg) {
@@ -1355,7 +1385,8 @@ function saveActiveProgress(showMsg = false) {
         saveBtn.innerHTML = '<i class="ti ti-check"></i> Saved';
         setTimeout(() => { saveBtn.innerHTML = original; }, 1200);
       }
-      showToast('Progress saved successfully');
+      if (!studentId) showToast('Saved locally. Add Student ID for cloud save.');
+      else showToast('Progress saved successfully');
     }
     return true;
   } catch (e) {
@@ -1370,9 +1401,21 @@ function clearActiveProgress() {
   if (btn) btn.style.display = 'none';
 }
 
-function loadActiveProgress() {
+async function loadActiveProgress() {
   try {
-    const raw = localStorage.getItem(ACTIVE_QUIZ_KEY);
+    let raw = localStorage.getItem(ACTIVE_QUIZ_KEY);
+    const studentId = getStudentId();
+    if (supabaseClient && studentId) {
+      const { data, error } = await supabaseClient
+        .from('quiz_progress')
+        .select('progress_json')
+        .eq('student_id', studentId)
+        .single();
+      if (!error && data?.progress_json) {
+        raw = JSON.stringify(data.progress_json);
+        localStorage.setItem(ACTIVE_QUIZ_KEY, raw);
+      }
+    }
     if (!raw) return false;
     const data = JSON.parse(raw);
     if (!data || !Array.isArray(data.questions) || data.questions.length === 0) return false;
@@ -1415,6 +1458,26 @@ function refreshResumeButton() {
   btn.style.display = hasSaved ? 'inline-flex' : 'none';
 }
 
+function getStudentId() {
+  const el = document.getElementById('student-id');
+  const v = (el?.value || '').trim();
+  if (v) {
+    localStorage.setItem(STUDENT_ID_KEY, v);
+    return v;
+  }
+  return (localStorage.getItem(STUDENT_ID_KEY) || '').trim();
+}
+
+function hydrateStudentId() {
+  const el = document.getElementById('student-id');
+  if (!el) return;
+  el.value = localStorage.getItem(STUDENT_ID_KEY) || '';
+  el.addEventListener('change', () => {
+    const v = (el.value || '').trim();
+    if (v) localStorage.setItem(STUDENT_ID_KEY, v);
+  });
+}
+
 function showToast(message) {
   let toast = document.getElementById('app-toast');
   if (!toast) {
@@ -1430,10 +1493,14 @@ function showToast(message) {
 }
 
 document.getElementById('start-btn').onclick = startQuiz;
-document.getElementById('resume-btn').onclick = () => loadActiveProgress();
+document.getElementById('resume-btn').onclick = async () => {
+  const ok = await loadActiveProgress();
+  if (!ok) showToast('No saved progress found');
+};
 renderLecGrid();
 renderSavedStats();
 refreshResumeButton();
+hydrateStudentId();
 </script>
 </html>
 
