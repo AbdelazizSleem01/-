@@ -386,6 +386,18 @@
     transition: opacity .2s ease;
   }
   .toast.show { opacity: 1; }
+  .site-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--text-secondary);
+    font-size: 13px;
+  }
+  .site-footer a {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .site-footer a:hover { text-decoration: underline; }
   .quiz-topbar {
     display: flex;
     justify-content: flex-start;
@@ -613,6 +625,11 @@
 
   <!-- Result Screen -->
   <div id="screen-result" style="display:none"></div>
+
+  <div class="site-footer">
+    بواسطة
+    <a href="https://abdelazizsleem.online/" target="_blank" rel="noopener noreferrer">Abdelaziz Sleem</a>
+  </div>
 </div>
 
 <script>
