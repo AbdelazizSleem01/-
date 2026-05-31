@@ -571,6 +571,10 @@
   }
   .ghost-btn {
     flex:1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     border:1px solid #c7dbf3;
     background:#f4f9ff;
     color:#165c9f;
@@ -613,7 +617,7 @@
         ابدأ الاختبار
       </button>
       <button class="ghost-btn" id="resume-btn" style="margin-top:10px;display:none">
-        <i class="ti ti-player-track-next"></i>
+        <i class="ti ti-restore"></i>
         استكمال المحاولة المحفوظة
       </button>
       <div class="saved-stats" id="progress-stats"></div>
@@ -1314,9 +1318,11 @@ function renderSavedStats() {
   if (!box) return;
   const history = readHistory();
   if (history.length === 0) {
-    box.innerHTML = '<strong>لا يوجد سجل بعد.</strong> ابدأ أول اختبار وسيتم حفظ تقدمك تلقائيًا.';
+    box.style.display = 'none';
+    box.innerHTML = '';
     return;
   }
+  box.style.display = 'block';
   const recent = history.slice(0, 5);
   const avg = Math.round(recent.reduce((s, r) => s + r.pct, 0) / recent.length);
   const best = Math.max(...history.map(r => r.pct));
